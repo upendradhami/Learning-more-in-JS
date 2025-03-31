@@ -1,4 +1,14 @@
-// // Every Objects in javascript have a prototype object , which has the properties of all real objects :
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // // Every Objects in javascript have a prototype object , which has the properties of all real objects :
 
 function Player(name,game,country){
   this.name = name,
@@ -8,7 +18,7 @@ function Player(name,game,country){
     console.log(`the player is ${this.name} who plays ${this.game} from ${this.country}`);
   }
 
-}
+};
 
 
 const player1 = new Player('Ronaldo','football','portugal');
@@ -32,16 +42,18 @@ const player1 = new Player('Ronaldo','football','portugal');
 // player2.show();
 
 
-console.log(Object.getPrototypeOf(Player) = Object.prototype );
-
 // we get here below that Player.prototype is inheritated from object.prototype just similar to that of player1 and player2 are inheritated from the player.
-Object.getPrototypeOf(Player.prototype) = Object.prototype ;
+console.log(Object.getPrototypeOf(Player.prototype) === Object.prototype );
 
 //Just as in above We have added a function using Player.prototype {show()} , 
 // similarly there are numerous functions under this Object.prototype functions e.g .valueof // .hasOwnProperty and many more like these
 
 // we can used as an example of prototypal inheritance in which the player1 and player2 can use such property of the objects like 
 
-player1.valueof();
+console.log(player1.valueof());
+console.log(Object.prototype.hasOwnProperty(valueof()));
 
 
+  </script>
+</body>
+</html>
