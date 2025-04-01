@@ -1,0 +1,22 @@
+body{
+  background-color: rgba(80, 149, 149,0.2);
+  background-blend-mode: hard-light;
+}
+
+
+.container{
+  display: flex;
+  background-color: aqua;
+  height: 200px;
+  width: 400px;
+}
+
+  .add,.remove{
+  background-color: lightblue;
+  height: 50px;
+  margin: 5px;
+  padding: 0 10px;
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: bold;
+}

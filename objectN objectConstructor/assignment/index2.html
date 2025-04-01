@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>add a book</title>
+  <style>
+    .box{
+      display: grid;
+      width: 50%;
+      justify-content: center;
+      align-items: center;
+      
+      position: absolute;
+      top: 50px;
+      left: 25%
+     
+    }
+
+    button{
+      margin: 15px 200px;
+      
+    }
+
+    .box1{
+       position: relative;
+       top: 80vh;
+       left: 45px;
+       text-decoration: none;
+       text-align: center;
+    }
+    a{
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+     <div class="box">
+      <h1>Enter the information below and submit</h1>
+      <label for="name">book:</label>
+
+      <input type="text" id="name">
+
+      <label for="author">author:</label>
+
+      <input type="text" name="" id="author">
+      <label for="status">status</label>
+
+      <input type="text" name="" id="status">
+
+       <button onclick="
+          addtoarray();
+       ">okay</button>
+     </div>
+
+     <div class="box1"><a href="index.html">go to page1</a></div>
+     <script src="lib.js">
+
+</body>
+</html>
