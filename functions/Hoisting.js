@@ -14,3 +14,6 @@ let callme = function(name){       // this is called as variable function
 function callmeagain(name){
   console.log(`hello it's me ${name}`);   // 
 }
+
+
+// variable functions are used for storing the anonymous functions function (name) is anonymous function.
