@@ -3,19 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> LIbRArY </title>
-
+  <title>Library</title>
   <link rel="stylesheet" href="lib.css">
 </head>
 <body>
 
-   <h1> This is the record of the books in our library of all students. </h1>
-   <div class="container">
-    
-     <button class="add"><a href="index2.html" target="_blank">Add</a></button>  <button class="remove">remove</button>
-   </div>
-  
+  <h1>Library Records</h1>
 
-<script src="lib.js"></script>
+  <div class="container">
+    <button class="add" onclick="window.location.href='index2.html'">Add Book</button>
+  </div>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Book</th>
+        <th>Author</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="bookList"></tbody>
+  </table>
+
+  <script src="lib.js" defer></script>
+
 </body>
 </html>

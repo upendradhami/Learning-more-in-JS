@@ -3,61 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>add a book</title>
+  <title>Add a Book</title>
   <style>
-    .box{
+    .box {
       display: grid;
       width: 50%;
       justify-content: center;
       align-items: center;
-      
-      position: absolute;
-      top: 50px;
-      left: 25%
-     
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
     }
 
-    button{
-      margin: 15px 200px;
-      
-    }
-
-    .box1{
-       position: relative;
-       top: 80vh;
-       left: 45px;
-       text-decoration: none;
-       text-align: center;
-    }
-    a{
-      text-align: center;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-     <div class="box">
-      <h1>Enter the information below and submit</h1>
-      <label for="name">book:</label>
 
-      <input type="text" id="name">
+  <div class="box">
+    <h1>Enter Book Details</h1>
 
-      <label for="author">author:</label>
+    <label for="name">Book:</label>
+    <input type="text" id="name">
 
-      <input type="text" name="" id="author">
-      <label for="status">status</label>
+    <label for="author">Author:</label>
+    <input type="text" id="author">
 
-      <input type="text" name="" id="status">
+    <label for="status">Status:</label>
+    <input type="text" id="status">
 
-       <button onclick="
-          addtoarray();
-       ">okay</button>
-     </div>
+    <button id="addBookBtn">Add Book</button>
+  </div>
 
-     <div class="box1"><a href="index.html">go to page1</a></div>
-     <script src="lib.js">
+  <script src="lib.js" defer></script>
 
 </body>
 </html>

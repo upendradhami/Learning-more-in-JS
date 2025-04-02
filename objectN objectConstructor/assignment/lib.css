@@ -1,22 +1,103 @@
-body{
-  background-color: rgba(80, 149, 149,0.2);
-  background-blend-mode: hard-light;
+/* General Page Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
-
-.container{
-  display: flex;
-  background-color: aqua;
-  height: 200px;
-  width: 400px;
+/* Header */
+h1 {
+  margin-top: 20px;
+  font-size: 28px;
+  color: #444;
 }
 
-  .add,.remove{
-  background-color: lightblue;
-  height: 50px;
-  margin: 5px;
-  padding: 0 10px;
-  text-transform: capitalize;
-  font-size: 20px;
+/* Container for Buttons */
+.container {
+  margin: 20px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
   font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.add {
+  background-color: #28a745;
+  color: white;
+}
+
+.add:hover {
+  background-color: #218838;
+}
+
+.remove {
+  background-color: #dc3545;
+  color: white;
+}
+
+.remove:hover {
+  background-color: #c82333;
+}
+
+/* Table Styling */
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Remove Button in Table */
+td button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+td button:hover {
+  background-color: #e60000;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  table {
+    width: 95%;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
