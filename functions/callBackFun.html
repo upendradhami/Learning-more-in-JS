@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>call back function</title>
+</head>
+<body>
+
+  
+   <button class="clickme"> click </button>
+
+
+
+   <script> 
+    let button = document.querySelector('.clickme');
+
+    // Callback function is a function which is called after something is done , it calls another function when anything is occured
+    // button.addEventListener("click",hello);    // here on clicking the button we have added an event to call hello() function which can be known as call back function 
+
+    // function hello(){
+    //   alert(`hey click it  HARD`);
+    // }
+
+
+   // we also have some shorthand methods for callback functions as : 
+   button.addEventListener("click", function (){
+     alert(`get some fresh air in the morning `);      // we can also use some arrow functions as well.
+   })
+
+
+   </script>
+</body>
+</html>
