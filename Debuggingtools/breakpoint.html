@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+
+  <script> 
+      // Set a breakpoint on the next line in your browser's developer tools
+  for (let i = 0; i < arr.length; i++) {
+    const element = arr[i];
+     debugger;
+    // Let's say we want to inspect the 'element' at each iteration
+    // We can set another breakpoint here
+
+    if (typeof element !== 'number') {
+      console.error(`Invalid element found: ${element}. Skipping.`);
+      continue;
+    }
+
+    sum += element;
+    count++;
+  }
+
+  // Set a breakpoint here to inspect the final 'sum' and 'count'
+  console.log("Calculation finished.");
+  return sum;
+
+
+// Example usage:
+const numbers1 = [1, 2, 3, 4, 5];
+const sum1 = calculateSum(numbers1);
+console.log(`The sum of ${numbers1} is: ${sum1}`);
+
+const numbers2 = [10, 20, "hello", 40, 50];
+const sum2 = calculateSum(numbers2);
+console.log(`The sum of ${numbers2} is: ${sum2}`);
+
+const numbers3 = [];
+const sum3 = calculateSum(numbers3);
+console.log(`The sum of ${numbers3} is: ${sum3}`);
+  </script>
+</body>
+</html>
