@@ -16,6 +16,8 @@
 // });
 
 
+// =======================================================================================================
+
 // //selecting the div and change image inside it.
 // let selectDiv = document.querySelector(".item");  // Selects the container
 // selectDiv.innerHTML = '<img src="https://wallpapers.com/images/hd/cool-picture-art-of-lion-rlst9ftvz1dvvn37.jpg" alt="Lion Image" height="300px">';
@@ -29,6 +31,8 @@
 // selectImg.setAttribute("height", "600");
 //    // changed height of image 
 
+
+// //===========================================================================================================
 
 // there is way that we can select the already selected element i.e  SEARCH THROUGH IT 
 
@@ -51,3 +55,12 @@
 // let selecth = selitem[0].querySelector('h2');
 // selecth.innerText = 'i have selected the next heaading again from JS and changed it';
 
+// // ===================================================================================================//
+
+// Now  we will know how console.dir  show methods in it .
+let heading = document.querySelector('h1');
+console.dir(heading.textContent);        // method used to get text content inside h1 
+console.dir(heading.parentElement);      //method to find parent element i.e div inside which h1  is defined 
+console.dir(heading.outerHTML);          //method to find what is after h1 ,
+console.dir(heading.inputMode);          
+console.dir(heading.innerHTML);
