@@ -59,7 +59,9 @@
 
 // Now  we will know how console.dir  show methods in it .
 let heading = document.querySelector('h1');
-console.dir(heading.textContent);        // method used to get text content inside h1 
+console.dir(heading.textContent);        // method used to get text content inside h1 which includes style and other hidden tags but inner html only shows the text 
+
+
 console.dir(heading.parentElement);      //method to find parent element i.e div inside which h1  is defined 
 console.dir(heading.outerHTML);          //method to find what is after h1 ,
 console.dir(heading.inputMode);          
