@@ -1,19 +1,19 @@
-// let pic = document.querySelector('.cool');
-// console.log(pic.classList);
+let pic = document.querySelector('.cool');
+console.log(pic.classList);
 
 
-// // Pic.classlist has various methods to use in i.e we can add ,remove ,toggle etc  
-// pic.classList.add('round');
-// pic.classList.remove('cool');
+// Pic.classlist has various methods to use in i.e we can add ,remove ,toggle etc  
+pic.classList.add('round');
+pic.classList.remove('cool');
 
-// console.log(pic.classList);
+console.log(pic.classList);
 
-// //by using toggle we can add and remove a single class back and forth like switch on/off.
-// function classtoggle(){
-//   pic.classList.toggle('round');
-// }
+//by using toggle we can add and remove a single class back and forth like switch on/off.
+function classtoggle(){
+  pic.classList.toggle('round');
+}
 
-// addEventListener('click',classtoggle);
+addEventListener('click',classtoggle);
 
 // //we have another method on the classlist which is contain it alwasys return returns true ,false boolean value
 // console.log(pic.classList.contains('cool'));
