@@ -4,10 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    body{
+      background-color:  greenyellow;
+      .nice,.wow,.great{
+        height: 200px;
+        margin:50px;
+      }
+
+    .round{
+      border-radius: 50%;
+      transform:rotate(3600deg) scale(1.5);
+      transition: all 1s;
+    }
+    }
+
+  </style>
 </head>
 <body>
   
+  <img src="../image/one.jpeg" class="nice cool" alt=""> <br>
+  <img src="../image/two.jpg" class="wow" alt="one pic"> <br>
 
+  <!-- DATA-ATTRIBUTES  are something that are used to insert in the elements of htmls which help in adding extra information about the elements and which can be easily accessible by the javascript and we can also modify them later > -->
+  <img src="../image/three.jpeg" class="great" data-name="upendra" data-id="23" data-picture="cat" alt="one pic">
 
   <script src="dom.js"></script>
 </body>
