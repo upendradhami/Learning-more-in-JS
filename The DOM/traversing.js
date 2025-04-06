@@ -11,8 +11,13 @@ console.log(upen.nextElementSibling);
 console.log(upen.parentElement);
 console.log(upen.children);
 
-
 // console.$0
 // undefined
 // $0.parentElement
 // you can go through this in console by selecting any element and traverse through console 
+
+
+const p = document.createElement('p');
+p.textContent = `hy man where were you `;
+document.body.appendChild(p);
+p.remove();
