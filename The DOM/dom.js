@@ -2,7 +2,7 @@ let pic = document.querySelector('.cool');
 console.log(pic.classList);
 
 
-// Pic.classlist has various methods to use in i.e we can add ,remove ,toggle etc  
+// Pic.classlist has various methods to use in element where we can add ,remove ,toggle classes etc  
 pic.classList.add('round');
 pic.classList.remove('cool');
 
