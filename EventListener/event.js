@@ -42,13 +42,26 @@
 //   button.removeEventListener('click',buttonclick);
 // });
 
+// ========================================================
+let buyButton = document.querySelectorAll('button.buy');
+
+buyButton.forEach (function(button) {
+ button.addEventListener('click', handleButtonClick);
+},true);
 
 
+// by passing the even in the event function we are allowed to access the various method connected with the event like event.target , event.buttons , .clientY , .defaultPrevented , .currentTarget)
 
+function handleButtonClick(event){
 
-
-
-
+ console.log(event.currentTarget);
+  console.log(event.target); 
+  console.log(event.target === event.currentTarget); 
+  console.log(event.target.innerText)
+  //  console.log(event.clientY);
+  // console.log(event.target.dataset);
+  // console.log(event.target.className);
+};
 
 
 
