@@ -57,12 +57,19 @@ function handleButtonClick(event){
  console.log(event.currentTarget);
   console.log(event.target); 
   console.log(event.target === event.currentTarget); 
-  console.log(event.target.innerText)
+  console.log(event.target.innerText);event
+  event.stopPropagation();
   //  console.log(event.clientY);
   // console.log(event.target.dataset);
   // console.log(event.target.className);
 };
 
+
+// ==================================================================
+
+window.addEventListener('click',function (event) {
+  console.log("clicked the window from anywhere ");
+});
 
 
 
