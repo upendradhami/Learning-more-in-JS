@@ -13,4 +13,4 @@ setTimeout(upen, 3000);
 //another easy way to do it is by doing inside the timeout function
 setTimeout(function greet(){
   console.log('how are you u' );
-},1000);
+},5000);
