@@ -7,6 +7,7 @@ function Person(name,age){
  function People(name){
   this.name = name
  };
+ 
  People.prototype.show = function(){
   console.log(` hello everyone it's me ${this.name}`);
 };

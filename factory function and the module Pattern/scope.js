@@ -2,9 +2,9 @@
 
  // This is a function and curly bracket indicate a block.
  function printAge(age) {
-   let varAge = 23;     // this is a function scoped variable.
+   let varAge = 23;     // this is a function scoped variable. i.e a private variable
 
-   //this is another block which can be defined from the curly brackets
+   //this is another block which can be defined inside the curly brackets
    if (age >0){
       // this is the block-speed variable that exists within its nearest enclosing block,
       
@@ -13,7 +13,7 @@
 
    }
   
-   //now if we try to console consAge it will so an Error!!
+   //now if we try to console conAge it will show an Error!!
     // console.log(conAge);
  }
 

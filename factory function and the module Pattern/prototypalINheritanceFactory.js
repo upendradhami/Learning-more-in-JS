@@ -1,4 +1,4 @@
-// here i will use prototypal inheritance to some metrics in createuser to createplayer factory
+// here i will use prototypal inheritance to transfer some metrics in createuser to createplayer factory
 
 // const Createuser = function(name){
 //      name = name;
@@ -6,9 +6,7 @@
 //     function showEmail() {
 //       console.log(`your email is ${email}`);
 //     }
-
 //     return{name,email,showEmail};
-
 // };
 
 
@@ -57,7 +55,7 @@ const Createplayer = function(name){
           count++; 
        showcount(); 
     },
-     dispCount(){         //this is also new objec
+     dispCount(){         //this is also new object
       showcount();
     }
   };

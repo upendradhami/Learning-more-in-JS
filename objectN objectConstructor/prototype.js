@@ -15,7 +15,7 @@ const player1 = new Player('Ronaldo','football','portugal');
  const player2 = new Player('Messi','football','argentina');
 
 
-// //prototype is another object through which the original properties are inheritated , just player.prototype is a prototype for player1 and player2 as it return true value below.
+// //prototype is another object through which the original properties are inheritated , just Player.prototype is a prototype for player1 and player2 as it return true value below.
 
 // console.log(Object.getPrototypeOf(player1) == Player.prototype);
 // // console.log(Object.getPrototypeOf(player2) == Player.prototype);

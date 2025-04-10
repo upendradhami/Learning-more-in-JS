@@ -20,13 +20,10 @@
  //another example;
 
 //  const Anything = function (){
-
 //     let count = 0;    // this is private variable 
-
 //     function showCount(){       // this is a private function as it is not returned as object
 //         console.log(`your count is ${count}`);
 //     }
-
 //     return{
 //         increase(){
 //         count++;

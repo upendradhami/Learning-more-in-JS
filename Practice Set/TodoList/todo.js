@@ -26,7 +26,7 @@ tableData.addEventListener('click', function (event) {
     }
   }
       
-  // H  andle remove
+  // Handle remove
   if (event.target.classList.contains('remove')) {
     const rowToRemove = event.target.closest('tr');
     rowToRemove.remove();
