@@ -50,4 +50,14 @@ console.clear();
  //sort
  console.log(arr.sort((a,b) => a-b));  // it will short in the ascending order;
  console.log(arr.sort((a,b) => b-a)); // it will sort the array in desending order ;
+
+
+ //push and pop 
+ console.log(arr.push(90)); 
+ console.log(arr.pop());
+ console.log(arr);
+ console.log(arr.pop());
+ console.log(arr.pop());
+ console.log(arr);
+ 
 })();
