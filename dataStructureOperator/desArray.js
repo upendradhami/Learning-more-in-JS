@@ -12,6 +12,9 @@
 //       console.log(` your order is : ${this.starterMenu[starterIndex]}, ${this.mainMenu[mainIndex]} .
 // `);
    return [this.starterMenu[starterIndex] , this.mainMenu[mainIndex] ];
+    },
+    pizza: function(ing1, ing2 ,ing3){
+      console.log(`making the pizza with ${ing1} , ${ing2} and ${ing3}`);
     }
   };
 
@@ -24,7 +27,7 @@
 
   const [x,y,z] = arr1;
   console.log(x,y,z);
-  console.clear();
+  console.clear();          //---------------clear
 
   // destructing the objects 
   let [one , , two ] = restaurant.categories;
@@ -50,5 +53,36 @@
   const [p=1 , q= 2 ,r=1 ,s=1] = arr;
   console.log(arr);
   console.log(p,q,r,s);  // r and s get the assigned value
+  console.clear();
+
+  // adding new elements in the array using spread operator
+  const newarr = [...arr1,23,22,];
+  console.log(newarr);
+  console.log(arr1);
+
+  //concating using spread operator
+  const newarr1 = [...arr,...arr1];
+  console.log(newarr1);
+
+  // It can be used to copy the objects also 
+  const newresturant = {...restaurant , showname: function(){ console.log(`restaurant name is  ${this.name}`) }};
+  newresturant.name = "ultar restrau";
+  console.log(newresturant);
+  newresturant.showname();
+  console.clear();       //-----------------------clear
+
+  const makepizza = [
+    prompt("Let's make a pizza, ingredient 1:"),
+    prompt("ingredient 2"),
+    prompt("ingredient 3"),
+  ];
+
+  restaurant.pizza(...makepizza);
+
+
+
+  
+
+
 
 })();
