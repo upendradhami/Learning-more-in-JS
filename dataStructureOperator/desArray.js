@@ -13,7 +13,7 @@
 // `);
    return [this.starterMenu[starterIndex] , this.mainMenu[mainIndex] ];
     },
-    pizza: function(ing1, ing2 ,ing3){
+    pizza: function(ing1, ing2 ,ing3){  // it was  called using spread operators
       console.log(`making the pizza with ${ing1} , ${ing2} and ${ing3}`);
     }
   };
@@ -71,18 +71,29 @@
   newresturant.showname();
   console.clear();       //-----------------------clear
 
-  const makepizza = [
-    prompt("Let's make a pizza, ingredient 1:"),
-    prompt("ingredient 2"),
-    prompt("ingredient 3"),
-  ];
+  // // real world example of spread operators  
+  // const makepizza = [
+  //   prompt("Let's make a pizza, ingredient 1:"),
+  //   prompt("ingredient 2"),
+  //   prompt("ingredient 3"),
+  // ];
 
-  restaurant.pizza(...makepizza);
+  // restaurant.pizza(...makepizza);
 
+  // now let's use (...) as rest operator/pattern i.e they can be used to just oppose of the spread
+  const [u,j, ...others] = [1,2,3,4,5,6,9];
+  console.log(u,j,others);    // here ...others do not destructed the remaining items of the array else it created another array to store the remaining numbers in the array . 
 
+ const add = function(...number){
+  let sum =0; 
+  number.forEach(element => {
+   sum  += element;});
+   return sum;
+ }
 
-  
-
-
+  console.log(add(5,4,6),
+  add(2,4,5,21,34),
+  add(34,22,623,672)
+);
 
 })();
