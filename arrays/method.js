@@ -7,7 +7,7 @@ let arr = [12,23,63,288,10,12,445,32,453];
 console.log(arr.slice(3,7));   // slice from 3 to 7
 console.log(arr.slice(3));     // slice from 3 to last
 console.log(arr.slice(-3));    // slice the last 3 items in array
-console.log([...arr]);           // make a copy of the array known as bread method
+console.log([...arr]);           // make a copy of the array known as spread method
 console.log(arr.slice());          // also used to make copy
 console.log(arr.slice(2,-2));    // slice from 2 and skip last two items 
 console.log(arr);
@@ -34,7 +34,7 @@ console.clear();
 
  // concat
  console.log(arr1.concat(arr2)); // it will just concatinate the arr1 with arr2 and create new array;
- console.log([...arr1,...arr2]); // it is alternate bread method of doing this ;
+ console.log([...arr1,...arr2]); // it is alternate spread operator of doing this ;
 
  //join
  console.log(arr1.join('--'));
@@ -59,5 +59,5 @@ console.clear();
  console.log(arr.pop());
  console.log(arr.pop());
  console.log(arr);
- 
+
 })();
