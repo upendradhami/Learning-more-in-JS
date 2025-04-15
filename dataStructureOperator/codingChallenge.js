@@ -54,7 +54,7 @@ console.log(gk, others);
  printGoals('upendra' , 'ram ' , 'upendra' , 'shyam ' , 'hari');
  printGoals(...game.scored);   // destructured the array scored and send it to function
 
- // team with lower odd is more likely to win so print console which team is  more likely to win 
+ //7. team with lower odd is more likely to win so print console which team is  more likely to win 
  console.clear();
 
  let oka=9;
@@ -63,4 +63,22 @@ console.log(gk, others);
 
  // if true , console ( execute)
  team1 < team2 && console.log("team1 wins due to little odd");
+
+ // 8. loop over the game.scored array and proint each player name to the conole with the goal number (ex: "goal 1 : lewandowski")
+  let goal=1;
+ for (const man of game.scored) {
+  console.log(`goal no. ${goal} : ${man }`);
+  goal ++;
+ }
+
+ // calculate the average ffo the odds 
+ let oding = Object.values(game.odds); let avg =0;
+ for (const ods of oding) { avg = avg+ods;}; avg = avg/oding.length;
+ console.log(avg);
+
+ // print the odds to console of each team 
+ let odsof = Object.entries(game.odds);
+ for(const [ team, odd] of odsof) {
+  console.log(`Odd of ${game[team] ?? 'draw'}: ${odd}`)
+ }
 })();
