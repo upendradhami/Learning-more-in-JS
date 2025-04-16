@@ -2,6 +2,16 @@
 'use strict';
 
 (function() {
+
+  const openingTime ={
+    // this is also an ES6 method
+     mon: {open:10 , close :22},
+    tue : {open : 10, close: 23},
+   [`day${1}`] : {open: 0, close: 0 },
+    thur : {open:10 , close: 9},
+    fri : {open : 10, close: 23},
+    sat : {open : 0, close :24},
+  };
   // ===============================SETS ==================================
   // here we will learn about sets , Set is a collection of unique values 
 //string as set 
@@ -44,15 +54,47 @@ console.log(rest.get('categories'));
 console.log(rest.get('review'));
 
 //has method
-console.log(rest.has('name')); console.log(rest.has('some'));
+console.log(rest.has('name'));     console.log(rest.has('some'));
 
 //delete method
-rest.set('ok', 'soemt');console.log(rest); rest.delete('ok');console.log(rest);
+rest.set('ok', 'soemt');console.log(rest);  rest.delete('ok');console.log(rest);
 
 //example 
 let time = 5;
 (time < rest.get('open') && console.log("hotel is open")) || (time >rest.get('close') && console.log(" the hotel is close "));
 
+// Maps definition directly without set method 
+ const question =new Map([
+  ['quest', 'which is the best programming in the world ?'],
+  [1, 'C/C++'],
+  [2, 'Java '],
+  [3, 'Javascript'],
+  ['answer', 3],
+  [true, 'Correct !!!'],
+  [false , 'Try again'],
+]);
 
+ // converting to  maps  from the objects 
+  const hours = new Map(Object.entries(openingTime));
+  console.log(hours);
+
+// Example of quiz app 
+  console.log(question.get('quest'));
+  for( const [ key,value] of question){
+    if(typeof key === "number") {
+      console.log(`Option ${key}: ${value}`);
+    }
+  }
+  // let ans = Number(prompt('what is your answer ? (choose option 1,2,3)'));
+   let ans =3;
+  // question.get('answer') === ans && console.log(question.get(true)) ;
+  // question.get('answer') === ans || console.log(question.get(false)) ;
+
+  // as we have boolean return from ans we can do it as :: 
+    console.log(question.get(question.get('answer') == ans));
+
+  // maps as array 
+  let days = new Map(Object.values(openingTime));
+      
 
 })();
