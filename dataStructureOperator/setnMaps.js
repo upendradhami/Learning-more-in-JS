@@ -73,7 +73,7 @@ let time = 5;
   [true, 'Correct !!!'],
   [false , 'Try again'],
 ]);
-
+ 
  // converting to  maps  from the objects 
   const hours = new Map(Object.entries(openingTime));
   console.log(hours);
@@ -94,7 +94,11 @@ let time = 5;
     console.log(question.get(question.get('answer') == ans));
 
   // maps as array 
-  let days = new Map(Object.values(openingTime));
+  let arr = [...question];
+  console.log(...arr);
+
+  // size of maps 
+  console.log(question.size);  /// 7 elements on array 
       
 
 })();
