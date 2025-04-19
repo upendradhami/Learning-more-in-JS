@@ -94,37 +94,37 @@
 // greetName('upendra');
 // greetName('pyare');
 
-// ======================================= Call and Apply Methods ====================
-// AS Normal function in javascript are type of objects so there are some methods used they are call and apply methods 
+// // ======================================= Call and Apply Methods ====================
+// // AS Normal function in javascript are type of objects so there are some methods used they are call and apply methods 
 
-let yeti = {
-  name : 'Yeti Airlines',
-  flight :'dhangagi to ktm',
-  booking :[],
-  book(flightNO, passengerName){
-    console.log(`${passengerName} Booked a flight on  ${this.name} => ${this.flight} // flight number is: ${flightNO}`);
+// let yeti = {
+//   name : 'Yeti Airlines',
+//   flight :'dhangagi to ktm',
+//   booking :[],
+//   book(flightNO, passengerName){
+//     console.log(`${passengerName} Booked a flight on  ${this.name} => ${this.flight} // flight number is: ${flightNO}`);
 
-    this.booking.push({name: this.name, flight:this.flight, flightNO, passengerName});
+//     this.booking.push({name: this.name, flight:this.flight, flightNO, passengerName});
    
-  }
-}
+//   }
+// }
 
-yeti.book(785,'upendradhami');
-// if we want to copy this book function to another object like buddha ,shree , etc then we can now directly use the name of this function like below but need not to define whole function again i.e 
+// yeti.book(785,'upendradhami');
+// // if we want to copy this book function to another object like buddha ,shree , etc then we can now directly use the name of this function like below but need not to define whole function again i.e 
 
-const buddha ={
-  name: 'Budhha Airlines',
-  flight: 'MNR to KTM',
-  booking:[],
-};
+// const buddha ={
+//   name: 'Budhha Airlines',
+//   flight: 'MNR to KTM',
+//   booking:[],
+// };
 
-const shree ={
-  name: 'Shree Airlines',
-  flight: 'Pokhara to KTM',
-  booking:[],
-};
+// const shree ={
+//   name: 'Shree Airlines',
+//   flight: 'Pokhara to KTM',
+//   booking:[],
+// };
 
-const book = yeti.book;
+// const book = yeti.book;
 // book(87,'upendra'); // this will not work as normal functions because our yeti.book() is using this.name and this.flight  , so Normal function don't take 'this' keyword .
 // So, to overcome this we have two methods call () and apply ().
 
@@ -139,29 +139,29 @@ const book = yeti.book;
 // book.apply(shree , [23,'Hari Ji']);
 
 
-// =================== ================= Bind Method ========================  --0-0-00-0-
+// // =================== ================= Bind Method ========================  --0-0-00-0-
 
-// bind method provides a function with a first parameter of this and other same i.e
+// // bind method provides a function with a first parameter of this and other same i.e
 
-let bookshree = book.bind(shree); // shree is for this 
-let bookbuddha = book.bind(buddha ,21) ; // buddha is for this scope in buddha object , we can define a variable which has to use repeatedly for ex. as above 
+// let bookshree = book.bind(shree); // shree is for this 
+// let bookbuddha = book.bind(buddha ,21) ; // buddha is for this scope in buddha object , we can define a variable which has to use repeatedly for ex. as above 
 
-bookshree(234,'upendra ji');
-bookbuddha( 'B Praak');
-bookbuddha('Shree RAdha Rani JI ');
-bookbuddha('Shree Kanhaiyya JI');
-console.clear();
+// bookshree(234,'upendra ji');
+// bookbuddha( 'B Praak');
+// bookbuddha('Shree RAdha Rani JI ');
+// bookbuddha('Shree Kanhaiyya JI');
+// console.clear();
 
 
-// ==== bind method on event listener 
- yeti.plane =343;
- yeti.buyplane = function(){
-    console.log(this);
-    this.plane++;
-    console.log(`${this.plane} is total number of plane we have`);
-  };
+// // ==== bind method on event listener 
+//  yeti.plane =343;
+//  yeti.buyplane = function(){
+//     console.log(this);
+//     this.plane++;
+//     console.log(`${this.plane} is total number of plane we have`);
+//   };
 
-  document.querySelector('.buy').addEventListener('click',yeti.buyplane.bind(yeti));
+//   document.querySelector('.buy').addEventListener('click',yeti.buyplane.bind(yeti));
 
 
   //=============== ======================partial Application ====================== ======= =====
@@ -174,17 +174,84 @@ console.clear();
 //    calVAT(200);
 //    calVAT(300);
 
-const addValue = function(rate) {
-return function(value){
-  console.log(` original value :${value} , After tax: ${value = value + value*rate/100}`);
+// const addValue = function(rate) {
+// return function(value){
+//   console.log(` original value :${value} , After tax: ${value = value + value*rate/100}`);
 
-}}
+// }}
 
-let calVAT = addValue(13);
-calVAT(100);
-calVAT(200);
-calVAT(300);
+// let calVAT = addValue(13);
+// calVAT(100);
+// calVAT(200);
+// calVAT(300);
+
+// // ==============================immediatetly Invoked Functions  IIFES ==================================
+
+// //normal function 
+// function callme() { console.log('i am called');}   callme();
+
+// // IIFE 
+// (function () {
+//   console.log('Im called from IIFE ');
+// })
+//  ();
+
+//  ( ()=> {console.log('i am u pendra dhami');}) ();
 
 
+//  // ====================================== CCLOSURES +++++++===========================
+
+//  const breaking = function() {
+//   let breakit = 0;
+
+//   return function() {
+//   // while this function is returned from breaking function there is no scope of breakit in this function but below it is incremented i.e it is accessing breakit but how ,=> It is all because of the closures.
+//   // CLOSURES  is a special characteristics of function in which they carry the access to their parent function's variables 
+//     breakit ++;
+//     console.log('the count reaches to ' + breakit);
+//   }
+//  }
+
+//  let count = breaking();
+//  count();
+//  count();
+//  count();
+//  console.dir(count);
+
+
+ // example 1 
+ let f;
+ const g = function() {
+   let a= 34;
+   f = function(){
+    console.log(`the number is :${a*2}`);
+   }
+ }
+ const h = function(){
+  let a =787;
+  f = function(){
+    console.log(` the number is ${a*2}`);
+  }
+ }
+
+ g();
+ f();
+ h();
+ f();
+
+
+ // Example 2 ;
+  
+const boardingPass = function(n,wait) {
+  let perGroup = n/3;
+  setTimeout(function(){
+    console.log(`we are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups of passengers , each of ${perGroup} passengers`);
+  },wait*1000);
+
+  console.log(`Boarding will start in ${wait} seconds`);
+}
+
+boardingPass(1500,4);
 
 })(); 
