@@ -184,12 +184,12 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // // =========================================== array.reduce(acc,value,index,array) : new accumulator which takes the sum of the values in the array   =======================
 
- const balance = movements.reduce(function(acc, val, i ){  
-  console.log(`the value of accumulator at ${i} is ${acc}`);
-  return acc+val;
-  }, 0 /* it is initial value of accumulator */ );
+//  const balance = movements.reduce(function(acc, val, i ){  
+//   console.log(`the value of accumulator at ${i} is ${acc}`);
+//   return acc+val;
+//   }, 0 /* it is initial value of accumulator */ );
 
-  console.log(balance);
+//   console.log(balance);
 
  ///////////////////////////////////////
 // Coding Challenge #2
@@ -212,6 +212,19 @@ GOOD LUCK 😀
 */
 
 function calcAverageHumanAge(ages){ 
-let Humanage;
-ages.filter(age =>{ age <=2 ? humanage = 2*age : humanage = 16 + 2*age });
+let Humanage = ages.map((age) =>{ return age <=2 ? age*2 :16+age*2;
+ });
+
+let dog18 = ages.filter(age => age>2);
+console.log(`dog which are at least 18 are : ${dog18.length} and are of age ${dog18}`);
+
+let avg = Humanage.reduce((acc,val)=>  acc+val, Humanage[0]);
+console.log(`the average of humanage is ${avg/Humanage.length}`);
+
+return Humanage;
+
 }
+
+console.log(calcAverageHumanAge([5,2,4,1,15,8,3])); 
+console.log('      ');
+console.log(calcAverageHumanAge([16,6,10,5,6,1,4]));
