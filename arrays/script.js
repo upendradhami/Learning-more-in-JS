@@ -78,7 +78,7 @@ const inputMovement = function(movement) {
        <div class="movements">
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i} ${type}</div>
-          <div class="movements__value"> ${mov}</div>
+          <div class="movements__value"> ${mov}€</div>
         </div>
      `;
 
@@ -100,13 +100,29 @@ inputMovement(account1.movements);
  }
  console.log(createUser(accounts)); 
 
- //show movements 
+ //show movements in total
  const showMovements = function(movements){ let Balance = movements.reduce((acc,mov,i)=>{return acc+mov},0);
- labelBalance.textContent = ` ${Balance} Eur`;
+ labelBalance.textContent = ` ${Balance} €`;
  }
  showMovements(account1.movements);
 
 
+ // Display deposits and withdrawals summary
+  function displaySumarry(move){
+
+   const sumIn = move.filter(mov => mov >0).reduce((acc,val,i,arr) => acc+val / arr.length);
+    labelSumIn.textContent = `${sumIn} €`
+  
+
+    const sumOut = move.filter(mov => mov <0).reduce((acc,val,i,arr) => acc+val / arr.length);
+     labelSumOut.textContent = `${Math.abs(sumOut)} €`
+
+     const interest = move.filter(mov => mov >0).map((mov) => mov*1.1/100).reduce((acc,int) => acc+int,0);
+     labelSumInterest.textContent =`${Math.round(interest)} %`;
+   }
+ 
+   displaySumarry(account1.movements);
+ 
 
 
 
