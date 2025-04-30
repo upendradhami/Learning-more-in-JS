@@ -136,12 +136,13 @@ createUsernames(accounts);
  }
 
 // // --- =================================  IMplementing login ==================
- 
+
+   
 btnLogin.addEventListener('click', function(e) {
   e.preventDefault();
   // find current user
-  let currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value );
-   
+  let currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value ); 
+
   // configuring login
   if( currentAccount?.pin === Number(inputLoginPin.value)){
    labelWelcome.textContent = `Welcome Back, ${currentAccount.owner.split(' ')[0]}`;
@@ -175,6 +176,49 @@ btnTransfer.addEventListener('click', function(e){
   // clear the fields 
   inputTransferAmount.value = inputTransferTo.value = '';
 });
+
+// Taking loan her ==========================
+
+btnLoan.addEventListener('click', function(e){ e.preventDefault();
+  
+  const amount = Number(inputLoanAmount.value);
+  //checks if amount is less than 10% of movements 
+  if(amount >0 && currentAccount.movements.some(mov => mov >= amount*0.1)){
+    // add movement
+  currentAccount.movements.push(amount);
+
+  // update UI
+  updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = '';
+
+});
+
+// ============================ deleting account and Use of findIndex method/
+
+btnClose.addEventListener('click',function(e){
+  e.preventDefault();
+  if(currentAccount.username === inputCloseUsername.value && currentAccount.pin === Number(inputClosePin.value)){
+  
+  // finding the index of account using findindex method
+  const index = accounts.findIndex(acc => acc.username === currentAccount.username
+  );
+
+  // deleting from the accounts array
+  accounts.splice(index,1);
+
+  //deleting the UI 
+  containerApp.style.opacity = 0;
+
+  //emptying the form fields
+  inputCloseUsername.value = inputClosePin.value = '';
+
+  //refreshing the welcome label
+  labelWelcome.textContent = `Log in to get started`;
+  
+  }
+})
 });
 
 
@@ -326,4 +370,51 @@ GOOD LUCK 😀
 // console.log(calcAverageHumanAge([5,2,4,1,15,8,3])); 
 // console.log('      ');
 // console.log(calcAverageHumanAge([16,6,10,5,6,1,4]));
-  
+
+
+// // ====================================== some and Every ===========================
+
+// // we have Equality : includes();
+// console.log(movements.includes(-130)); 
+
+// // SOME: checks condition not value
+// console.log(movements.some(mov => mov <0));
+// console.log(movements.some(mov => mov <0));
+
+// // Every : checks condition for every value in array
+// console.log(movements.every(mov => mov >0));
+// console.log(movements.every(mov => mov <0));
+
+// // separate callbacks & DRY 
+// let deposit = mov => mov >0;
+// console.log(account4.movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+
+// // ============================= =================== flat and flatMap =======================
+
+// const arr = [1,2,3,[2,2,123,52,],[234,21,34 ]];
+// console.log(arr.flat()); //done for only one level of nested array 
+
+// const arr2 = [1,2,[234,234,[234,22,42,[234]]], 89,77,[687,89,[6,8]]];
+// console.log(arr2.flat());
+// console.log(arr2.flat(2));
+// console.log(arr2.flat(3));
+
+// // now lets flat all the movements in the accounts 
+// let totalBal = accounts.map(acc => acc.movements).flat().reduce((acc,mov) => acc+mov,0);
+// console.log(totalBal);
+
+
+// // we can use the flatMap instead of flat and map separately like:
+
+// let totalAmt = accounts.flatMap(acc => acc.movements).reduce((acc,mov) => acc+mov ,0);
+// console.log(totalAmt);
+
+
+// ======================================= sorting arrays ==========================
+
+// strings 
+const  malik = ['upendra','dohi', 'moartha','kalij'];
+console.log(malik.sort());
