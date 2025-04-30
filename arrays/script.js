@@ -86,48 +86,97 @@ const inputMovement = function(movement) {
   });
 }
 
-inputMovement(account1.movements);
 
 
 // creating usernames i.e ud for upendra dhami , js Jonas schmedtmann
-
- const createUser = function (acc){
-    let username = acc.owner.toLowerCase().split(' ').map(arr => arr[0]).join('');
-   return username;
- }
-
- console.log(createUser(account1)); 
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+  
 
  //show movements in total
- const showMovements = function(movements){ let Balance = movements.reduce((acc,mov,i)=>{return acc+mov},0);
- labelBalance.textContent = ` ${Balance} €`;
+ const showBalance = function(account){  account.Balance = account.movements.reduce((acc,mov,i)=>{return acc+mov},0);
+ labelBalance.textContent = ` ${account.Balance} €`;
  }
- showMovements(account1.movements);
+ 
 
 
  // Display deposits and withdrawals summary
-  function displaySumarry(move){
+  function displaySumarry(acc){
 
-   const sumIn = move.filter(mov => mov >0).reduce((acc,val,i,arr) => acc+val / arr.length);
-    labelSumIn.textContent = `${sumIn} €`
+   const sumIn = acc.movements.filter(mov => mov >0).reduce((acc,val,i,arr) => acc+val / arr.length);
+    labelSumIn.textContent = `${Math.round(sumIn)} €`
   
 
-    const sumOut = move.filter(mov => mov <0).reduce((acc,val,i,arr) => acc+val / arr.length);
+    const sumOut = acc.movements.filter(mov => mov <0).reduce((acc,val,i,arr) => acc+val / arr.length);
      labelSumOut.textContent = `${Math.abs(sumOut)} €`
 
-     const interest = move.filter(mov => mov >0).map((mov) => mov*1.1/100).reduce((acc,int) => acc+int,0);
+     const interest = acc.movements.filter(mov => mov >0).map((mov) => mov*acc.interestRate/100).reduce((acc,int) => acc+int,0);
+     
      labelSumInterest.textContent =`${Math.round(interest)} %`;
    }
-   displaySumarry(account1.movements);
+// update UI 
+ const updateUI = function(acc){
+ 
+  //display summary of balance
+ displaySumarry(acc);
+
+ // handle the withdrawal and deposit
+ inputMovement(acc.movements);
+
+ // show the total balance 
+ showBalance(acc);
+ }
 
 // // --- =================================  IMplementing login ==================
  
 btnLogin.addEventListener('click', function(e) {
   e.preventDefault();
-  // validating username and pin 
+  // find current user
+  let currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value );
+   
+  // configuring login
+  if( currentAccount?.pin === Number(inputLoginPin.value)){
+   labelWelcome.textContent = `Welcome Back, ${currentAccount.owner.split(' ')[0]}`;
+
+   //displaying UI 
+   containerApp.style.opacity = 100;
+  inputLoginPin.value = inputLoginUsername.value = '';
+   updateUI(currentAccount);
+
+  }
+
+
+btnTransfer.addEventListener('click', function(e){
+  e.preventDefault();
   
- console.log('login');
+  //geting amount
+  const amount = Number(inputTransferAmount.value);
+  //getting receiveracc
+  const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+  console.log(amount,receiverAcc);
+
+  // checks availability for tranfer
+  if( amount >0 && currentAccount.Balance >=amount && receiverAcc?.username !== currentAccount.username){
+  
+  // update the amounts and update
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    updateUI(currentAccount);
+  }
+
+  // clear the fields 
+  inputTransferAmount.value = inputTransferTo.value = '';
 });
+});
+
 
 
 
