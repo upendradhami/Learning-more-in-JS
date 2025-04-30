@@ -92,13 +92,11 @@ inputMovement(account1.movements);
 // creating usernames i.e ud for upendra dhami , js Jonas schmedtmann
 
  const createUser = function (acc){
-  acc.forEach( (accs) => {
-    accs.username = accs.owner.toLowerCase().split(' ').map(arr => arr[0]).join('');
-    
-  })
-   
+    let username = acc.owner.toLowerCase().split(' ').map(arr => arr[0]).join('');
+   return username;
  }
- console.log(createUser(accounts)); 
+
+ console.log(createUser(account1)); 
 
  //show movements in total
  const showMovements = function(movements){ let Balance = movements.reduce((acc,mov,i)=>{return acc+mov},0);
@@ -120,17 +118,21 @@ inputMovement(account1.movements);
      const interest = move.filter(mov => mov >0).map((mov) => mov*1.1/100).reduce((acc,int) => acc+int,0);
      labelSumInterest.textContent =`${Math.round(interest)} %`;
    }
- 
    displaySumarry(account1.movements);
+
+// // --- =================================  IMplementing login ==================
  
-
-
-
+btnLogin.addEventListener('click', function(e) {
+  e.preventDefault();
+  // validating username and pin 
+  
+ console.log('login');
+});
 
 
 
 ///  learning section  ↓↓ 
-// // for-of and for-Each method in array:
+// //======================== for-of and for-Each method in array:================================== 
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -198,7 +200,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // console.log(deposits);
 
 
-// // =========================================== array.reduce(acc,value,index,array) : new accumulator which takes the sum of the values in the array   =======================
+// // =========================================== array.reduce(acc,val,i,arr) : new accumulator which takes the sum of the values in the array   ====================================================
 
 //  const balance = movements.reduce(function(acc, val, i ){  
 //   console.log(`the value of accumulator at ${i} is ${acc}`);
@@ -206,6 +208,15 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   }, 0 /* it is initial value of accumulator */ );
 
 //   console.log(balance);
+
+
+// // ======================================array.find() method ,========================================  similar to find method but returns an element instead of whole array 
+
+//  let firstWithdrawal = movements.find(mov => mov <0);
+//  console.log(firstWithdrawal);
+
+//  let acc1 = accounts.find(acc => acc.owner  === 'Jessica Davis');
+//  console.log(acc1);
 
  ///////////////////////////////////////
 // Coding Challenge #2
@@ -227,20 +238,43 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-function calcAverageHumanAge(ages){ 
-let Humanage = ages.map((age) =>{ return age <=2 ? age*2 :16+age*2;
- });
+// function calcAverageHumanAge(ages){ 
+// let Humanage = ages.map((age) =>{ return age <=2 ? age*2 : 16+age*2;
+//  });
 
-let dog18 = ages.filter(age => age>2);
-console.log(`dog which are at least 18 are : ${dog18.length} and are of age ${dog18}`);
+// let dog18 = Humanage.filter(age => age >=18);
+// console.log(`dog which are at least 18 are : ${dog18.length} and are of age ${dog18}`);
 
-let avg = Humanage.reduce((acc,val)=>  acc+val, Humanage[0]);
-console.log(`the average of humanage is ${avg/Humanage.length}`);
+// let avg = dog18.reduce((acc,val)=>  acc+val, 0);
 
-return Humanage;
+// console.log(`the average of humanage is ${avg/dog18.length}`);
 
-}
+// return Humanage;
 
-console.log(calcAverageHumanAge([5,2,4,1,15,8,3])); 
-console.log('      ');
-console.log(calcAverageHumanAge([16,6,10,5,6,1,4]));
+//  }
+
+// console.log(calcAverageHumanAge([5,2,4,1,15,8,3])); 
+// console.log('      ');
+// console.log(calcAverageHumanAge([16,6,10,5,6,1,4]));
+
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+
+
+//  const calcAverageHumanAge = (ages) => ages.map(age => age<=2 ? (age*2):(16+age*2)).filter(age => age >= 18).reduce((acc,val,i,arr) => acc+val/arr.length, 0); 
+
+
+// console.log(calcAverageHumanAge([5,2,4,1,15,8,3])); 
+// console.log('      ');
+// console.log(calcAverageHumanAge([16,6,10,5,6,1,4]));
+  
