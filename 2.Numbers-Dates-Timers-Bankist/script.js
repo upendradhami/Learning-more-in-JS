@@ -88,11 +88,15 @@
 
   // formating the date
   const formatDate = function (date, locale) {
-    const now = new Date();
+    const now = (new Date()).toISOString();
+    
     const days = function (date1, date2) {
+      console.log(date1);
+      console.log(date2);
       return (Math.abs(((date1 - date2) / (1000 * 60 * 60 * 24))));
     }
-    const num = days(date, now);
+    const num = days(date.toISOString(), now);
+    
     if (num == 0) return 'Today';
     if (num == 1) return 'yesterday';
     if (num <= 7) return `${days} Ago`;
@@ -155,7 +159,6 @@
     };
 
     const locale = navigator.language;
-
     //  labelDate.textContent = `${new Intl.DateTimeFormat('en-US',options).format(nowt)}`
 
     labelDate.textContent = `${new Intl.DateTimeFormat(locale, options).format(nowt)}`
@@ -209,51 +212,48 @@
 
   ///////////////////////////////////////
   // Eventhandler
-  let currentAccount; 
-  let time = 30;
 
- // time decreasing function 
- function timeshow(){
-  let min = Math.trunc(time/60);
-  let sec = Math.trunc(time%60);
+     // setting timer 
+  
+     let time = 300; 
 
-  labelTimer.textContent = `${min}:${sec}`;
-   
-  if(time == 0){
-    labelWelcome.textContent = 'Log in to get started';
-    containerApp.style.opacity = 0;
-   
+  function tick(){
+    
+    const min = String(Math.trunc(time/60)).padStart(2,0);
+    const sec = String(Math.trunc(time%60)).padStart(2,0);
+    labelTimer.textContent = `${min}:${sec}`;
+
+    if(time == 0){
+      containerApp.style.opacity = 0;
+      labelWelcome.textContent = 'Log in to get started';
+      clearInterval(timer);
+    }
+    time --;
   }
-  time--;
-
-}
-
- // time decreasing function caller after each second
- let timer = setInterval(() => {
-  timeshow();
+   
+  let timer= setInterval(() => {
+   tick();
   }, 1000);
 
-  // seting the interval for main timer
-  const maintimer = setInterval(() => {
+  function handleTimer() {
     clearInterval(timer);
-  }, 5000);
+      time = 300 ;
+      timer = setInterval(() => {
+      tick();
+      }, 1000);
+  }
 
 
+  
+    let currentAccount;
 
-
-  //=================LOG  IN ==================
-
-  btnLogin.addEventListener('click', function (e) {
-    // Prevent form from submitting
+   btnLogin.addEventListener('click', function(e) { 
     e.preventDefault();
-    clearInterval(timer); 
-    
-    timeshow();
-    
     currentAccount = accounts.find(
       acc => acc.username === inputLoginUsername.value
     );
-    console.log(currentAccount);
+    
+    
 
     if (currentAccount?.pin === Number(inputLoginPin.value)) {
       // Display UI and message
@@ -265,12 +265,13 @@
       inputLoginUsername.value = inputLoginPin.value = '';
       inputLoginPin.blur();
      
-     
-
+      setTimeout(() => handleTimer(),0.000);
+    
       // Update UI
       updateUI(currentAccount);
     }
   });
+
 
 
   // loan transfer 
@@ -292,10 +293,12 @@
       currentAccount.movements.push(-amount);
       receiverAcc.movements.push(amount);
 
+      setTimeout(() => handleTimer(),0.000);
+
       // Transfering date
       currentAccount.movementsDates.push((new Date()).toISOString());
       receiverAcc.movementsDates.push((new Date()).toISOString());
-
+     
       // Update UI
       updateUI(currentAccount);
     }
@@ -308,13 +311,18 @@
     const amount = Number(inputLoanAmount.value);
 
     if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+
       // Add movement
       currentAccount.movements.push(amount);
 
-      //Update movement data
-      const now = new Date();
-      currentAccount.movementsDates.push(now);
+      // after taking loan
+      setTimeout(() => handleTimer(),0.000);
 
+      //Update movement data
+     
+      currentAccount.movementsDates.push((new Date()).toISOString());
+
+      setTimeout(() => handleTimer(),0.000);
       // Update UI
       updateUI(currentAccount);
     }
@@ -347,14 +355,14 @@
   let sorted = false;
   btnSort.addEventListener('click', function (e) {
     e.preventDefault();
-    displayMovements(currentAccount.movements, !sorted);
+    displayMovements(currentAccount, !sorted);
     sorted = !sorted;
   });
 
-  //fake login 
-  currentAccount = account1;
-  updateUI(currentAccount);
-  containerApp.style.opacity = 100;
+  // //fake login 
+  // currentAccount = account1;
+  // updateUI(currentAccount);
+  // containerApp.style.opacity = 100;
 
   /////////////////////////////////////////////////
   /// LEARNINGS ARE BELOW
