@@ -138,7 +138,7 @@
   };
 
 
-
+// calculating Balance in total i.e current balance
   const calcDisplayBalance = function (acc) {
 
     acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
@@ -161,6 +161,7 @@
     labelDate.textContent = `${new Intl.DateTimeFormat(locale, options).format(nowt)}`
   };
 
+  // displaying the total summary i.e in , out , interest
   const calcDisplaySummary = function (acc) {
     const incomes = acc.movements
       .filter(mov => mov > 0)
@@ -183,6 +184,7 @@
     labelSumInterest.textContent = `${formatNumber( acc.locale, acc.currency,interest)}`;
   };
 
+  // create username
   const createUsernames = function (accs) {
     accs.forEach(function (acc) {
       acc.username = acc.owner
@@ -206,13 +208,48 @@
   };
 
   ///////////////////////////////////////
-  // Event handlers
-  let currentAccount;
+  // Eventhandler
+  let currentAccount; 
+  let time = 30;
+
+ // time decreasing function 
+ function timeshow(){
+  let min = Math.trunc(time/60);
+  let sec = Math.trunc(time%60);
+
+  labelTimer.textContent = `${min}:${sec}`;
+   
+  if(time == 0){
+    labelWelcome.textContent = 'Log in to get started';
+    containerApp.style.opacity = 0;
+   
+  }
+  time--;
+
+}
+
+ // time decreasing function caller after each second
+ let timer = setInterval(() => {
+  timeshow();
+  }, 1000);
+
+  // seting the interval for main timer
+  const maintimer = setInterval(() => {
+    clearInterval(timer);
+  }, 5000);
+
+
+
+
+  //=================LOG  IN ==================
 
   btnLogin.addEventListener('click', function (e) {
     // Prevent form from submitting
     e.preventDefault();
-
+    clearInterval(timer); 
+    
+    timeshow();
+    
     currentAccount = accounts.find(
       acc => acc.username === inputLoginUsername.value
     );
@@ -227,6 +264,8 @@
       // Clear input fields
       inputLoginUsername.value = inputLoginPin.value = '';
       inputLoginPin.blur();
+     
+     
 
       // Update UI
       updateUI(currentAccount);
@@ -487,18 +526,7 @@
 
     if(order.includes('Slice') )clearTimeout(ordering)
 
-      let time = document.createElement('h1');
-time.classList.add('timeone');
-document.body.appendChild(time); // Add the element to DOM
-
-function timeshow() {
-  setInterval(() => {
-    const now = new Date();
-    time.innerText = now.toLocaleTimeString(); // Update the text directly
-  }, 1000);
-}
-
-timeshow(); // Start the clock
-
+  
+  
 
 })();
