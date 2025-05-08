@@ -124,5 +124,26 @@
 
 
 
+  // =================================================== Event PRoPagation and event bubbling ============================
+
+
+   const randomInt = (max, min) => Math.floor(Math.random() * (max-min +1) +min);
+    const bgcolor = () => `rgb(${randomInt(0,255)},${randomInt(0,255)},${randomInt(0,255)})`;
+
+    document .querySelector('.nav__link').addEventListener('click', function(e) {
+      this.style.backgroundColor = bgcolor();
+    })
+
+    document .querySelector('.nav__links').addEventListener('click', function(e) {
+      this.style.backgroundColor = bgcolor();
+    }, true)
+    
+    document .querySelector('.nav').addEventListener('click', function(e) {
+      this.style.backgroundColor = bgcolor();
+    },true)
+  
+
+  
+
 
 })();
