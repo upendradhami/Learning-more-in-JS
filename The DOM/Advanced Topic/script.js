@@ -32,6 +32,7 @@
     }
   });
 
+
   // first scroll  on learn MOre : 
   const btnScroll = document.querySelector('.btn--scroll-to');
   const section1 = document.querySelector('#section--1');
@@ -86,6 +87,33 @@
       document.querySelector(id).scrollIntoView({behavior:'smooth'});
     }
   })
+
+ ///  Tabbed Components .......
+   const allTabs = document.querySelector('.operations__tab-container');
+   const containerTab = document.querySelectorAll('.operations__tab');
+   const allContent = document.querySelectorAll('.operations__content');
+
+   // selects the tab container 
+     allTabs.addEventListener('click',function(e){
+
+      //Remove already Active classes 
+     let clicked = e.target.closest('.operations__tab');
+     containerTab.forEach( t => t.classList.remove('operations__tab--active'));
+     allContent.forEach(c => c.classList.remove("operations__content--active"));
+
+     if(!clicked) return;
+
+
+     // Adding the classes required
+     clicked.classList.add('operations__tab--active');
+     console.log(clicked.dataset.tab);
+     document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+    
+
+   })
+
+
+
 
   // Learnings are all here ====/======================================================================
 
@@ -184,6 +212,7 @@
   */
   // traversing through parents .i.e UPward Direction----------
   
+  /* 
   const h1 = document.querySelector('h1');
   console.log(h1.parentElement);
   console.log(h1.parentNode);
@@ -206,6 +235,6 @@
   [...h1.parentElement.children].forEach(function(el){
     if(el != h1) el.style.transform = 'scale(0.5)';
   })
-
+ */
 
 })();
