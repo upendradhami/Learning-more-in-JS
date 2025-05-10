@@ -63,6 +63,29 @@
 
   });
 
+  // ----------------Event delegation on page navigation =========================================================
+
+  //  method 1 
+  //  document.querySelectorAll('.nav__link').forEach(el => { el.addEventListener('click', function(e){
+  //   e.preventDefault();
+  //   const id = this.getAttribute('href');
+  //   document.querySelector(id).scrollIntoView({behavior:'smooth'});
+  // })
+  // });
+
+  // For smooth page navigation above method make a tons of copy if there are many navlink so, event delegation is used for Page navigation i.e 
+   // 1. At first we select the parent element 
+   // 2. we apply delegation for the target element 
+
+  // This method doesn't make any copy of it .
+  document.querySelector('.nav__links').addEventListener('click',function(e){
+    e.preventDefault();
+    if(e.target.classList.contains('nav__link')){
+      console.log('ok');
+      const id = e.target.getAttribute('href');
+      document.querySelector(id).scrollIntoView({behavior:'smooth'});
+    }
+  })
 
   // Learnings are all here ====/======================================================================
 
@@ -127,20 +150,20 @@
   // =================================================== Event PRoPagation and event bubbling ============================
 
 
-   const randomInt = (max, min) => Math.floor(Math.random() * (max-min +1) +min);
-    const bgcolor = () => `rgb(${randomInt(0,255)},${randomInt(0,255)},${randomInt(0,255)})`;
+  //  const randomInt = (max, min) => Math.floor(Math.random() * (max-min +1) +min);
+  //   const bgcolor = () => `rgb(${randomInt(0,255)},${randomInt(0,255)},${randomInt(0,255)})`;
 
-    document .querySelector('.nav__link').addEventListener('click', function(e) {
-      this.style.backgroundColor = bgcolor();
-    })
+  //   document .querySelector('.nav__link').addEventListener('click', function(e) {
+  //     this.style.backgroundColor = bgcolor();
+  //   })
 
-    document .querySelector('.nav__links').addEventListener('click', function(e) {
-      this.style.backgroundColor = bgcolor();
-    }, true)
+  //   document .querySelector('.nav__links').addEventListener('click', function(e) {
+  //     this.style.backgroundColor = bgcolor();
+  //   }, true)
     
-    document .querySelector('.nav').addEventListener('click', function(e) {
-      this.style.backgroundColor = bgcolor();
-    },true)
+  //   document .querySelector('.nav').addEventListener('click', function(e) {
+  //     this.style.backgroundColor = bgcolor();
+  //   },true)
   
 
   
