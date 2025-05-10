@@ -166,7 +166,46 @@
   //   },true)
   
 
+  // =====================================DOM TRAVERSING =================================================
+
+  //traversing through childrens i.e downWARD Direction .........
+
+  /*
+  const sec1 =document.querySelector('#section--1');
+  console.log(sec1.childNodes);  // all nodes 
+  console.log(sec1.children);    // html collections 
+  sec1.firstElementChild.color ='red';
+  sec1.children[0].style.color = 'palegreen';  
+  console.log(sec1.children[1].children[3].getAttribute('alt'));
+  console.log(sec1.firstElementChild.style.color='red');
+  console.log(sec1.firstChild);
+  console.log(sec1.lastChild);
+  console.log(sec1.lastElementChild);;
+  */
+  // traversing through parents .i.e UPward Direction----------
   
+  const h1 = document.querySelector('h1');
+  console.log(h1.parentElement);
+  console.log(h1.parentNode);
+
+
+  //element1111.closest(element)  provide the closest element to the element11111 
+  h1.closest('.header__title').style.backgroundColor = 'pink';
+  h1.closest('h1').style.backgroundColor = 'red';
+
+  // traversing siblings I.e SIDEWAYS DIRECTION =====
+
+  console.log(h1.nextElementSibling);
+  console.log(h1.previousElementSibling);
+
+  console.log(h1.previousSibling);
+  console.log(h1.nextSibling);
+
+  // console.log(h1.parentElement.children); // it provides all the siblings of h1 , include h1 
+ 
+  [...h1.parentElement.children].forEach(function(el){
+    if(el != h1) el.style.transform = 'scale(0.5)';
+  })
 
 
 })();
