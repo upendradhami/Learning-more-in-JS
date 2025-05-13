@@ -9,6 +9,11 @@
   const overlay = document.querySelector('.overlay');
   const btnCloseModal = document.querySelector('.btn--close-modal');
   const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+   const allTabs = document.querySelector('.operations__tab-container');
+   const containerTab = document.querySelectorAll('.operations__tab');
+   const allContent = document.querySelectorAll('.operations__content');
+   const nav = document.querySelector('.nav');
+
 
   const openModal = function () {
     modal.classList.remove('hidden');
@@ -89,9 +94,6 @@
   })
 
  ///  Tabbed Components .......
-   const allTabs = document.querySelector('.operations__tab-container');
-   const containerTab = document.querySelectorAll('.operations__tab');
-   const allContent = document.querySelectorAll('.operations__content');
 
    // selects the tab container 
      allTabs.addEventListener('click',function(e){
@@ -109,13 +111,38 @@
      console.log(clicked.dataset.tab);
      document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
     
-
    })
 
+   // Adding nice Hover Effect on the navigation link================================================
+  const mouseHover =function(e,opacity){
+    if(nav.classList.contains('.nav__link')){
+     const link = this;
+     const sibling = link.closest('.nav').querySelectorAll('.nav__link');
+     const logo = link.closest('.nav').querySelector('img');
+     sibling.forEach(el => {
+      if(el !== link ){
+        el.style.opacity = opacity;
+      }})
+      logo.style.opacity= opacity;
+    }l
+     
+  }
+
+
+nav.addEventListener('mouseover',mouseHover.bind(0.5));
+nav.addEventListener('mouseout',mouseHover.bind(1));
+
+  //    nav.addEventListener('mouseover',function(e){
+  //    mouseHover(e,0.5)
+  //  })
+  //  nav.addEventListener('mouseout',function(e){
+  //    mouseHover(e,1);
+  //  })
 
 
 
-  // Learnings are all here ====/======================================================================
+
+  // LEARNINGS ARE ALL HERE ====/======================================================================
 
   // //  SELECTING THE ELEMENT 
   // console.log(document.documentElement); // selects the whole document.
