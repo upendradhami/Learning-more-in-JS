@@ -114,31 +114,40 @@
    })
 
    // Adding nice Hover Effect on the navigation link================================================
-  const mouseHover =function(e,opacity){
-    if(nav.classList.contains('.nav__link')){
-     const link = this;
-     const sibling = link.closest('.nav').querySelectorAll('.nav__link');
-     const logo = link.closest('.nav').querySelector('img');
-     sibling.forEach(el => {
-      if(el !== link ){
-        el.style.opacity = opacity;
-      }})
-      logo.style.opacity= opacity;
-    }l
+
+    const mousehover = function(e,opc=this){
+       if(e.target.classList.contains('nav__link')){
+      const link = e.target;
+      const sibling = link.closest('.nav').querySelectorAll('.nav__link');
+    
+    const bankistLogo = link.closest('.nav').querySelector('.nav__logo');
+    console.log(bankistLogo);
+    
+    sibling.forEach(el => {
+      if(el !== link){
+        el.style.opacity = opc;
+        bankistLogo.style.opacity = opc;
+      } });
      
+    }
   }
 
+    // nav.addEventListener('mouseover',function(e){
+    //   mousehover(e,0.5);
+    // });
+   
+   
+   nav.addEventListener('mouseout',function(e){   mousehover(e,1) })   
+   
+    nav.addEventListener('mouseover',mousehover.bind(0.5)); // using bind method to pass the value of opc as 0.5
+   
+    //  nav.addEventListener('mouseout',mousehover.bind(1)); // using bind method to pass the value of opc as 0.5
+   
 
-nav.addEventListener('mouseover',mouseHover.bind(0.5));
-nav.addEventListener('mouseout',mouseHover.bind(1));
 
-  //    nav.addEventListener('mouseover',function(e){
-  //    mouseHover(e,0.5)
-  //  })
-  //  nav.addEventListener('mouseout',function(e){
-  //    mouseHover(e,1);
-  //  })
 
+
+   
 
 
 
