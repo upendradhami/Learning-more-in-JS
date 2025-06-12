@@ -143,6 +143,34 @@
    
     //  nav.addEventListener('mouseout',mousehover.bind(1)); // using bind method to pass the value of opc as 0.5
    
+// =============================================== Adding STICKY CLASS  WHILE SCROLLING =============================
+
+ const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height; // Get the height of the header
+
+const stickyFun = function(entries) {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) {
+      // If the header is not intersecting, add the sticky class
+      nav.classList.add('sticky');
+      console.log('my name is upendra dhami adding a sticky class');
+      
+    } else {
+      nav.classList.remove('sticky');
+      console.log('my name is upendra dhami removing a sticky class');
+    }
+  });
+  
+};
+
+const observer = new IntersectionObserver(stickyFun, {
+  root: null, // Observe relative to the viewport
+  threshold: .9, // Trigger at 0% and 20% visibility
+ // rootMargin: `-${navHeight}px` // Offset the trigger by header height
+});
+
+observer.observe(header); // Start observing the header
+
 
 
 
@@ -171,8 +199,9 @@
   //  cookie.classList.add('cookie-message');
   //  cookie.textContent = ' HEre are some coookies if you want to add ';
   //  cookie.innerHTML = ` Here are some coookies if you want to add     <button class ='btn btn--close'>close</button>`;
-
-  //  // inserting into document
+  //
+  // 
+  //   // inserting into document
 
   //  header.prepend(cookie);
   //  header.append(cookie);  // prepend and append are methods for inserting element as child 
@@ -272,5 +301,26 @@
     if(el != h1) el.style.transform = 'scale(0.5)';
   })
  */
+
+  // ======================================================= intersection observer API =========================================================
+  // Intersection Observer API is used to observe the visibility of an element in the viewport.
+  // It is used to implement lazy loading, infinite scrolling, and other features that require visibility detection.
+  // It is a powerful API that allows you to observe the visibility of an element in the viewport. 
+
+   function anyfunction(entries, observer) {
+    entries.forEach(entry => {
+      console.log(entry);
+      if (entry.isIntersecting){
+        console.log('call my name -- upendra dhami'); };
+      }) }
+   
+   let sectionobserver = new IntersectionObserver( anyfunction,{
+    root: null, // null means the viewport
+    threshold: 0.1, // 10% of the element is visible
+    rootMargin: '0px' // no margin
+   })
+
+    sectionobserver.observe(section1); // observe the section1 element
+  
 
 })();
