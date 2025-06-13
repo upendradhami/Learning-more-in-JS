@@ -172,11 +172,61 @@ const observer = new IntersectionObserver(stickyFun, {
 observer.observe(header); // Start observing the header
 
 
+//============ Revealing the section effects =====================================================================
+
+
+const reveal = function(entries, observer){
+  const [entry] = entries;
+  console.log(entry);
+  
+  if(!entry.isIntersecting) return ;
+  entry.target.classList.remove('section--hidden');
+}
 
 
 
+ const sectionObserver = new IntersectionObserver(reveal,{
+  root: null, 
+  threshold: 0.15,
+  rootMargin: `${navHeight}px`
+ })
+
+ const allSection = document.querySelectorAll('.section');
+ console.log(allSection);
+
+ allSection.forEach(section => {
+    section.classList.add('section--hidden');
+    sectionObserver.observe(section);
+ })
+ 
+
+
+// ================================================= LAZY LOADING EFFECT ===================================================
+  
+  const imageLoader = function(entries, observer) {
+    const [entry] = entries;
+    if(!entry.isIntersecting) return;
+     entry.target.src = entry.target.dataset.src;
+
+     entry.target.addEventListener('load',()=> {
+        entry.target.classList.remove('lazy-img');
+     });
+
+     observer.unobserve(entry.target);
+  }
+
+
+  const imageObserver = new IntersectionObserver(imageLoader, {
+    root: null, // Observe relative to the viewport
+    threshold: 0, // Trigger when the image is in the viewport,
+    rootMargin: '200px' // Load images when they are within 200px of the viewport
+    });
    
+  const lazyimg = document.querySelectorAll('img[data-src]');
+  lazyimg.forEach(img => imageObserver.observe(img));
 
+  
+  
 
 
   // LEARNINGS ARE ALL HERE ====/======================================================================
