@@ -220,7 +220,7 @@ const reveal = function(entries, observer){
     root: null, // Observe relative to the viewport
     threshold: 0, // Trigger when the image is in the viewport,
     rootMargin: '200px' // Load images when they are within 200px of the viewport
-    });
+    }); 
    
   const lazyimg = document.querySelectorAll('img[data-src]');
   lazyimg.forEach(img => imageObserver.observe(img));
