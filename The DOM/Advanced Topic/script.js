@@ -195,8 +195,8 @@ const reveal = function(entries, observer){
  console.log(allSection);
 
  allSection.forEach(section => {
-    section.classList.add('section--hidden');
     sectionObserver.observe(section);
+    // section.classList.add('section--hidden');
  })
  
 
@@ -230,6 +230,53 @@ const reveal = function(entries, observer){
 
 
   // LEARNINGS ARE ALL HERE ====/======================================================================
+
+  // ============================================================   lEARNING ABOUT SLIDER EFFECTS =================
+
+const slides = document.querySelectorAll('.slide')
+const slider = document.querySelector('.slider');
+
+slider.style.transform = 'scale(0.4) translateX(-600px)';
+slider.style.overflow = 'visible';
+
+slides.forEach((s,i) => {
+  s.style.transform = `translateX(${i*100}%)`
+});
+
+
+
+
+const leftslide = document.querySelector('.slider__btn--left');
+const rightslide = document.querySelector('.slider__btn--right');
+
+let clkslide =0;
+
+rightslide.addEventListener('click',function(){
+   if(clkslide == slides.length -1){
+    clkslide = 0;
+   }else{
+    clkslide ++;
+   }
+
+   slides.forEach((s,i)=> {
+     s.style.transform = `translateX(${(i-clkslide)*100}%)`;
+   })
+})
+
+
+leftslide.addEventListener('click',function(){
+   if(clkslide == 0 ){
+    clkslide = slides.length -1;
+   }else{
+    clkslide --;
+   }
+
+   slides.forEach((s,i)=> {
+     s.style.transform = `translateX(${(i-clkslide)*100}%)`;
+   })
+})
+
+
 
   // //  SELECTING THE ELEMENT 
   // console.log(document.documentElement); // selects the whole document.
@@ -357,20 +404,23 @@ const reveal = function(entries, observer){
   // It is used to implement lazy loading, infinite scrolling, and other features that require visibility detection.
   // It is a powerful API that allows you to observe the visibility of an element in the viewport. 
 
-   function anyfunction(entries, observer) {
-    entries.forEach(entry => {
-      console.log(entry);
-      if (entry.isIntersecting){
-        console.log('call my name -- upendra dhami'); };
-      }) }
+  //  function anyfunction(entries, observer) {
+  //   entries.forEach(entry => {
+  //     console.log(entry);
+  //     if (entry.isIntersecting){
+  //       console.log('call my name -- upendra dhami'); };
+  //     }) }
    
-   let sectionobserver = new IntersectionObserver( anyfunction,{
-    root: null, // null means the viewport
-    threshold: 0.1, // 10% of the element is visible
-    rootMargin: '0px' // no margin
-   })
+  //  let sectionobserver = new IntersectionObserver( anyfunction,{
+  //   root: null, // null means the viewport
+  //   threshold: 0.1, // 10% of the element is visible
+  //   rootMargin: '0px' // no margin
+  //  })
 
-    sectionobserver.observe(section1); // observe the section1 element
+  //   sectionobserver.observe(section1); // observe the section1 element
   
+
+
+
 
 })();
