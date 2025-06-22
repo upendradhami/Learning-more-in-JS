@@ -9,10 +9,10 @@
   const overlay = document.querySelector('.overlay');
   const btnCloseModal = document.querySelector('.btn--close-modal');
   const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-   const allTabs = document.querySelector('.operations__tab-container');
-   const containerTab = document.querySelectorAll('.operations__tab');
-   const allContent = document.querySelectorAll('.operations__content');
-   const nav = document.querySelector('.nav');
+  const allTabs = document.querySelector('.operations__tab-container');
+  const containerTab = document.querySelectorAll('.operations__tab');
+  const allContent = document.querySelectorAll('.operations__content');
+  const nav = document.querySelector('.nav');
 
 
   const openModal = function () {
@@ -65,7 +65,7 @@
     //     , behaviour: 'smooth',
     //   });
 
-    section1.scrollIntoView({behavior:'smooth'}); // short hand of above manual method 
+    section1.scrollIntoView({ behavior: 'smooth' }); // short hand of above manual method 
 
   });
 
@@ -80,139 +80,131 @@
   // });
 
   // For smooth page navigation above method make a tons of copy if there are many navlink so, event delegation is used for Page navigation i.e 
-   // 1. At first we select the parent element 
-   // 2. we apply delegation for the target element 
+  // 1. At first we select the parent element 
+  // 2. we apply delegation for the target element 
 
   // This method doesn't make any copy of it .
-  document.querySelector('.nav__links').addEventListener('click',function(e){
+  document.querySelector('.nav__links').addEventListener('click', function (e) {
     e.preventDefault();
-    if(e.target.classList.contains('nav__link')){
-      console.log('ok');
+    if (e.target.classList.contains('nav__link')) {
       const id = e.target.getAttribute('href');
-      document.querySelector(id).scrollIntoView({behavior:'smooth'});
+      document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
     }
   })
 
- ///  Tabbed Components .......
+  ///  Tabbed Components .......
 
-   // selects the tab container 
-     allTabs.addEventListener('click',function(e){
+  // selects the tab container 
+  allTabs.addEventListener('click', function (e) {
 
-      //Remove already Active classes 
-     let clicked = e.target.closest('.operations__tab');
-     containerTab.forEach( t => t.classList.remove('operations__tab--active'));
-     allContent.forEach(c => c.classList.remove("operations__content--active"));
+    //Remove already Active classes 
+    let clicked = e.target.closest('.operations__tab');
+    containerTab.forEach(t => t.classList.remove('operations__tab--active'));
+    allContent.forEach(c => c.classList.remove("operations__content--active"));
 
-     if(!clicked) return;
+    if (!clicked) return;
 
 
-     // Adding the classes required
-     clicked.classList.add('operations__tab--active');
-     console.log(clicked.dataset.tab);
-     document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
-    
-   })
+    // Adding the classes required
+    clicked.classList.add('operations__tab--active');
+   
+    document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 
-   // Adding nice Hover Effect on the navigation link================================================
+  })
 
-    const mousehover = function(e,opc=this){
-       if(e.target.classList.contains('nav__link')){
+  // Adding nice Hover Effect on the navigation link================================================
+
+  const mousehover = function (e, opc = this) {
+    if (e.target.classList.contains('nav__link')) {
       const link = e.target;
       const sibling = link.closest('.nav').querySelectorAll('.nav__link');
-    
-    const bankistLogo = link.closest('.nav').querySelector('.nav__logo');
-    console.log(bankistLogo);
-    
-    sibling.forEach(el => {
-      if(el !== link){
-        el.style.opacity = opc;
-        bankistLogo.style.opacity = opc;
-      } });
-     
+
+      const bankistLogo = link.closest('.nav').querySelector('.nav__logo');
+      sibling.forEach(el => {
+        if (el !== link) {
+          el.style.opacity = opc;
+          bankistLogo.style.opacity = opc;
+        }
+      });
+
     }
   }
 
-    // nav.addEventListener('mouseover',function(e){
-    //   mousehover(e,0.5);
-    // });
-   
-   
-   nav.addEventListener('mouseout',function(e){   mousehover(e,1) })   
-   
-    nav.addEventListener('mouseover',mousehover.bind(0.5)); // using bind method to pass the value of opc as 0.5
-   
-    //  nav.addEventListener('mouseout',mousehover.bind(1)); // using bind method to pass the value of opc as 0.5
-   
-// =============================================== Adding STICKY CLASS  WHILE SCROLLING =============================
+  // nav.addEventListener('mouseover',function(e){
+  //   mousehover(e,0.5);
+  // });
 
- const header = document.querySelector('.header');
-const navHeight = nav.getBoundingClientRect().height; // Get the height of the header
 
-const stickyFun = function(entries) {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) {
-      // If the header is not intersecting, add the sticky class
-      nav.classList.add('sticky');
-      console.log('my name is upendra dhami adding a sticky class');
-      
-    } else {
-      nav.classList.remove('sticky');
-      console.log('my name is upendra dhami removing a sticky class');
-    }
+  nav.addEventListener('mouseout', function (e) { mousehover(e, 1) })
+
+  nav.addEventListener('mouseover', mousehover.bind(0.5)); // using bind method to pass the value of opc as 0.5
+
+  //  nav.addEventListener('mouseout',mousehover.bind(1)); // using bind method to pass the value of opc as 0.5
+
+  // =============================================== Adding STICKY CLASS  WHILE SCROLLING =============================
+
+  const header = document.querySelector('.header');
+  const navHeight = nav.getBoundingClientRect().height; // Get the height of the header
+
+  const stickyFun = function (entries) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        // If the header is not intersecting, add the sticky class
+        nav.classList.add('sticky');
+      } else {
+        nav.classList.remove('sticky');
+      }
+    });
+
+  };
+
+  const observer = new IntersectionObserver(stickyFun, {
+    root: null, // Observe relative to the viewport
+    threshold: .9, // Trigger at 0% and 20% visibility
+    // rootMargin: `-${navHeight}px` // Offset the trigger by header height
   });
-  
-};
 
-const observer = new IntersectionObserver(stickyFun, {
-  root: null, // Observe relative to the viewport
-  threshold: .9, // Trigger at 0% and 20% visibility
- // rootMargin: `-${navHeight}px` // Offset the trigger by header height
-});
-
-observer.observe(header); // Start observing the header
+  observer.observe(header); // Start observing the header
 
 
-//============ Revealing the section effects =====================================================================
+  //============ Revealing the section effects =====================================================================
 
 
-const reveal = function(entries, observer){
-  const [entry] = entries;
-  console.log(entry);
-  
-  if(!entry.isIntersecting) return ;
-  entry.target.classList.remove('section--hidden');
-}
-
-
-
- const sectionObserver = new IntersectionObserver(reveal,{
-  root: null, 
-  threshold: 0.15,
-  rootMargin: `${navHeight}px`
- })
-
- const allSection = document.querySelectorAll('.section');
- console.log(allSection);
-
- allSection.forEach(section => {
-    sectionObserver.observe(section);
-    // section.classList.add('section--hidden');
- })
- 
-
-
-// ================================================= LAZY LOADING EFFECT ===================================================
-  
-  const imageLoader = function(entries, observer) {
+  const reveal = function (entries, observer) {
     const [entry] = entries;
-    if(!entry.isIntersecting) return;
-     entry.target.src = entry.target.dataset.src;
+    if (!entry.isIntersecting) return;
+    entry.target.classList.remove('section--hidden');
+  }
 
-     entry.target.addEventListener('load',()=> {
-        entry.target.classList.remove('lazy-img');
-     });
 
-     observer.unobserve(entry.target);
+
+  const sectionObserver = new IntersectionObserver(reveal, {
+    root: null,
+    threshold: 0.15,
+    rootMargin: `${navHeight}px`
+  })
+
+  const allSection = document.querySelectorAll('.section');
+ 
+  allSection.forEach(section => {
+    sectionObserver.observe(section);
+    section.classList.add('section--hidden');
+  })
+
+
+
+  // ================================================= LAZY LOADING EFFECT ===================================================
+
+  const imageLoader = function (entries, observer) {
+    const [entry] = entries;
+    if (!entry.isIntersecting) return;
+    entry.target.src = entry.target.dataset.src;
+
+    entry.target.addEventListener('load', () => {
+      entry.target.classList.remove('lazy-img');
+    });
+
+    observer.unobserve(entry.target);
   }
 
 
@@ -220,61 +212,100 @@ const reveal = function(entries, observer){
     root: null, // Observe relative to the viewport
     threshold: 0, // Trigger when the image is in the viewport,
     rootMargin: '200px' // Load images when they are within 200px of the viewport
-    }); 
-   
+  });
+
   const lazyimg = document.querySelectorAll('img[data-src]');
   lazyimg.forEach(img => imageObserver.observe(img));
 
-  
-  
+
+
+  // ============================================================   l   ADDING SLIDER EFFECTS =================
+
+
+  const slider = function () {
+
+    const slides = document.querySelectorAll('.slide');
+    const leftslide = document.querySelector('.slider__btn--left');
+    const rightslide = document.querySelector('.slider__btn--right');
+    const dotContainer = document.querySelector('.dots');
+
+    let curSlide = 0;
+
+    // sliding effect
+    const goToSlide = function (slide) {
+      slides.forEach((s, i) => {
+        s.style.transform = `translateX(${(i - slide) * 100}%)`
+      })
+    }
+    goToSlide(0);
+
+
+    const forwslide = function () {
+      if (curSlide == slides.length - 1) {
+        curSlide = 0;
+      } else {
+        curSlide++;
+      }
+      goToSlide(curSlide);
+    }
+
+    const prevSlide = function () {
+      if (curSlide == 0) {
+        curSlide = slides.length - 1;
+      } else {
+        curSlide--;
+      }
+      goToSlide(curSlide);
+    }
+
+    // Event listener on buttons left and right
+    leftslide.addEventListener('click', prevSlide)
+    rightslide.addEventListener('click', forwslide)
+
+    // document.addEventListener('keydown', function(e){
+    //   console.log(e);
+    //     e.key === 'ArrowRight' && forwslide();
+    //     e.key === 'ArrowLeft' && prevSlide();
+    // } )
+
+
+    // creating dots 
+    const createDots = function (slide) {
+      slides.forEach((_, i) => {
+        dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"> </button>`);
+      })
+    }
+    createDots();
+
+    // adding background to the dots 
+    const showDots = function (slide) {
+      document.querySelectorAll('.dots__dot').forEach(dots => {
+        dots.classList.remove('dots__dot--active');
+      })
+
+
+      document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
+    }
+
+    showDots(0);
+
+    // making dots clickable
+    dotContainer.addEventListener('click', function (e) {
+      if (e.target.classList.contains('dots__dot')) {
+        const { slide } = e.target.dataset;
+        goToSlide(slide);
+        showDots(slide);
+      }
+    });
+  }
+
+  slider();
+
 
 
   // LEARNINGS ARE ALL HERE ====/======================================================================
 
-  // ============================================================   lEARNING ABOUT SLIDER EFFECTS =================
-
-const slides = document.querySelectorAll('.slide')
-const slider = document.querySelector('.slider');
-
-slider.style.transform = 'scale(0.4) translateX(-600px)';
-slider.style.overflow = 'visible';
-
-slides.forEach((s,i) => {
-  s.style.transform = `translateX(${i*100}%)`
-});
-
-
-
-
-const leftslide = document.querySelector('.slider__btn--left');
-const rightslide = document.querySelector('.slider__btn--right');
-
-let clkslide =0;
-
-rightslide.addEventListener('click',function(){
-   if(clkslide == slides.length -1){
-    clkslide = 0;
-   }else{
-    clkslide ++;
-   }
-
-   slides.forEach((s,i)=> {
-     s.style.transform = `translateX(${(i-clkslide)*100}%)`;
-   })
-})
-
-
-leftslide.addEventListener('click',function(){
-   if(clkslide == 0 ){
-    clkslide = slides.length -1;
-   }else{
-    clkslide --;
-   }
-
-   slides.forEach((s,i)=> {
-     s.style.transform = `translateX(${(i-clkslide)*100}%)`;
-   })
-})
+  
 
 
 
@@ -350,11 +381,11 @@ leftslide.addEventListener('click',function(){
   //   document .querySelector('.nav__links').addEventListener('click', function(e) {
   //     this.style.backgroundColor = bgcolor();
   //   }, true)
-    
+
   //   document .querySelector('.nav').addEventListener('click', function(e) {
   //     this.style.backgroundColor = bgcolor();
   //   },true)
-  
+
 
   // =====================================DOM TRAVERSING =================================================
 
@@ -373,7 +404,7 @@ leftslide.addEventListener('click',function(){
   console.log(sec1.lastElementChild);;
   */
   // traversing through parents .i.e UPward Direction----------
-  
+
   /* 
   const h1 = document.querySelector('h1');
   console.log(h1.parentElement);
@@ -410,7 +441,7 @@ leftslide.addEventListener('click',function(){
   //     if (entry.isIntersecting){
   //       console.log('call my name -- upendra dhami'); };
   //     }) }
-   
+
   //  let sectionobserver = new IntersectionObserver( anyfunction,{
   //   root: null, // null means the viewport
   //   threshold: 0.1, // 10% of the element is visible
@@ -418,8 +449,14 @@ leftslide.addEventListener('click',function(){
   //  })
 
   //   sectionobserver.observe(section1); // observe the section1 element
-  
 
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('dom content is loaded fully ');
+  });
+
+  window.addEventListener('load', () => {
+    console.log('window is completely load and it is observed that first the document is loaded and then the window is loaded ');
+  });
 
 
 
