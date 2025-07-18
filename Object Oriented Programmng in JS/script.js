@@ -83,11 +83,11 @@ Person.prototype.calAge = function() {
 // ================================ STATIC METHOD ================================================
 // it is used only for the case if you want any single function for the object
 // Static method assigned directly to the constructor
-Person.getSurname = function(username) {
-  // Split the username by spaces and return the last element
-  const parts = username.trim().split(" ");
-  return parts.length > 1 ? parts[parts.length - 1] : "";
-};
+// Person.getSurname = function(username) {
+//   // Split the username by spaces and return the last element
+//   const parts = username.trim().split(" ");
+//   return parts.length > 1 ? parts[parts.length - 1] : "";
+// };
 
 
 ///////////////////////////////////////
@@ -129,7 +129,7 @@ Person.getSurname = function(username) {
 // console.log(car2.brake());
 
 
-// // =============================================================ES6 classes 
+// // =============================================================ES6 classes =================================
   
 // //=========================== class expression 
 //   // const PersonCl = class{}
@@ -181,22 +181,23 @@ Person.getSurname = function(username) {
 //    car.latestVersion= 77;
 //    console.log(car.latestVersion);
 
-//--------------=================OBject.CReate()---------===========================
-const clock = {
-  call: ()=>{
-    console.log(`It is exactly ${new Date().getHours()}o'clock now.`);
-  },
-  setalarm: (time,merdian)=>{
-     console.log(`you have set an ,alarm for ${time} ${merdian}`)
-  }
+// //--------------=================OBject.CReate()---------===========================
+// const clock = {
+//   call: ()=>{
+//     console.log(`It is exactly ${new Date().getHours()}o'clock now.`);
+//   },
+//   setalarm: (time,merdian)=>{
+//      console.log(`you have set an ,alarm for ${time} ${merdian}`)
+//   }
   
- }
+//  }
 
- const Alarm = Object.create(clock);  // we use this instead of new operator for creating object
- Alarm.setalarm(7,'am');
- Alarm.call();
+//  const Alarm = Object.create(clock);  // we use this instead of new operator for creating object
+//  Alarm.setalarm(7,'am');
+//  Alarm.call();
 
- // Let's now perform inhertance of student object from the object Person 
+ // Let's now perform inhertance of student object from the object Person using constructor functions
+ //---------------------------------------------------------------------------------------------
  
  
  const Student = function(username, birthDate, id,course){
@@ -215,7 +216,50 @@ const clock = {
  Ram.calAge();   // now this Ram student can access to the calAge of Person.prototype
  
 
+ console.log(Ram.__proto__);
+ console.log(Ram.__proto__.__proto__ );
 
+ console.log(Ram instanceof Student);
+ console.log(Ram instanceof Person);
+ console.log(Ram instanceof Object);
 
+// -------------------PERFORMING INHERITANCE IN ES6 CLASSES -------------------------------------
+ class PersonCl{
+  constructor(firstName, DOB){
+    this.firstName = firstName;
+    this.DOB = DOB;
+  }
+
+   calAge(){
+     console.log(`${this.firstName} , your age is : ${2025-this.DOB}`);
+   }
+ }
+
+   class StudentCl extends PersonCl {
+     constructor(firstName,DOB,id,course){
+      
+      super(firstName,DOB);
+      this.course = course; 
+      this.id = id;
+      this.intro = function(){
+        console.log(`The name of id of student is ${this.id} and currently studying ${this.course} `)
+       }
+     }
+   }
+
+   const Manju = new StudentCl("Manju Jagri",2003,43, "bbs");
+   Manju.calAge();
+   Manju.intro();
+
+   //------------------------------------------now using object.create------------------------------------
+
+    const studentProto = function(firstName,birthDate){
+       this.firstName = firstName;
+       this.birthDate = birthDate;
+    }
+
+    const Student1 = Object.create(studentProto);
+    const Upen = Object.create(Student1);
+    console.log(Upen);
 
 }) ();
