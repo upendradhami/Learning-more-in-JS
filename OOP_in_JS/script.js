@@ -85,6 +85,7 @@ Person.prototype.calAge = function() {
 // Static method assigned directly to the constructor
 // Person.getSurname = function(username) {
 //   // Split the username by spaces and return the last element
+
 //   const parts = username.trim().split(" ");
 //   return parts.length > 1 ? parts[parts.length - 1] : "";
 // };
@@ -206,7 +207,10 @@ Person.prototype.calAge = function() {
    this.id = id;
  }
 
- Student.prototype = Object.create(Person.prototype);
+ Student.prototype = Object.create(Person.prototype); // this will link student.__proto__ = person.prototype 
+ // which is done by Object.create() , Real inheritance is done here 
+
+
  Student.prototype.intro = function(){
   console.log(`The name of id of student is ${this.id} and currently studying ${this.course} `)
  }
@@ -223,28 +227,33 @@ Person.prototype.calAge = function() {
  console.log(Ram instanceof Person);
  console.log(Ram instanceof Object);
 
+ Student.prototype.constructor= Student;  // used to set the student's constructor function to itself 
+ console.dir(Student.prototype.constructor);
+
 // -------------------PERFORMING INHERITANCE IN ES6 CLASSES -------------------------------------
  class PersonCl{
   constructor(firstName, DOB){
     this.firstName = firstName;
     this.DOB = DOB;
   }
-
-   calAge(){
-     console.log(`${this.firstName} , your age is : ${2025-this.DOB}`);
-   }
  }
 
-   class StudentCl extends PersonCl {
+ PersonCl.prototype.calAge = function(){
+     console.log(`${this.firstName} , your age is : ${2025-this.DOB}`);
+   }
+
+
+   class StudentCl extends PersonCl {     // main inheritance is done here 
      constructor(firstName,DOB,id,course){
-      
-      super(firstName,DOB);
+     
+      super(firstName,DOB); // always need to call the parent class 
       this.course = course; 
       this.id = id;
-      this.intro = function(){
+      
+     }
+     intro(){
         console.log(`The name of id of student is ${this.id} and currently studying ${this.course} `)
        }
-     }
    }
 
    const Manju = new StudentCl("Manju Jagri",2003,43, "bbs");
@@ -253,13 +262,23 @@ Person.prototype.calAge = function() {
 
    //------------------------------------------now using object.create------------------------------------
 
-    const studentProto = function(firstName,birthDate){
+    const PersonProto = {
+      calage() {
+        console.log(2025- this.birthDate);
+      },
+
+       init(firstName,birthDate) {
        this.firstName = firstName;
        this.birthDate = birthDate;
     }
+    
+    }
 
-    const Student1 = Object.create(studentProto);
+    const Student1 = Object.create(PersonProto);  // parent class inheritance from function
+
     const Upen = Object.create(Student1);
     console.log(Upen);
+    
+    
 
 }) ();
