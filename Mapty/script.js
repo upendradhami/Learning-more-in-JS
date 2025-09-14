@@ -74,10 +74,10 @@ console.log(run1, cycle1);
 class App {
   #map;
   #mapEvent;
+  #workout=[];
 
   constructor() {
     this._getPosition();
-
     // Listen for form submission
     form.addEventListener('submit', this._newWorkout.bind(this));
 
@@ -151,65 +151,62 @@ class App {
 
   // ============ Add new workout ============
   _newWorkout(e) {
+  e.preventDefault();
 
-    e.preventDefault();
+  // helper functions
+  const valid = (...inp) => inp.every(num => Number.isFinite(num));
+  const posit = (...inp) => inp.every(num => num >= 0);
 
-    // get the data here 
-    const type = inputType.value;
-    const distance = inputDistance.value;
-    const cadence = inputCadence.value;
-    const elevation = inputElevation.value;
-    const duration = inputDuration.value;
+  // inputs
+  const type = inputType.value;
+  const distance = +inputDistance.value;
+  const duration = +inputDuration.value;
+  const cadence = +inputCadence.value;
+  const elevation = +inputElevation.value;
+  const coords = this.#mapEvent.latlng;
 
-    // configure the data whether correct or wrong 
-
-    // if data type is running workout, create running object
-    if(type = 'running'){
-      if(!Number.isFinite(distance)|| !Number.isFinite(duration) || !Number.isFinite(cadence)) 
-        return; alert("Enter the positve number");
-    }
-
-    // if the data is cycling workout , create cycling object 
-    if(type = 'cycling'){
-      if(!Number.isFinite(distance)|| !Number.isFinite(duration) || !Number.isFinite(elevation)) 
-        return; alert("Enter the positve number");
-    }
-
-
-    // render the workout on the form
-
-
-    // clear the form 
-
-
-    //  // Get latitude & longitude from saved click
-    const coords = this.#mapEvent.latlng;
-
-    // Add marker on clicked location
-    L.marker(coords)
-      .addTo(this.#map)
-      .bindPopup(
-        L.popup({
-          maxWidth: 250,
-          minWidth: 100,
-          autoClose: false,
-          closeOnClick: false,
-          className: 'running-popup',
-        })
-      )
-      .setPopupContent('💪 Workout here!')
-      .openPopup();
-
-    // Clear and refocus
-    inputDistance.focus();
-    inputDistance.value =
-      inputDuration.value =
-      inputCadence.value =
-      inputElevation.value =
-      '';
-
-
+  // Running
+  if (type === 'running') {
+    const num = [distance, duration, cadence];
+    if (!valid(...num) || !posit(...num)) return alert("Enter valid & positive numbers");
+    const workout = new running(coords, distance, duration, cadence);
+    this.#workout.push(workout);
   }
+
+  // Cycling
+  if (type === 'cycling') {
+    const num = [distance, duration, elevation];
+    if (!valid(...num) || !posit(...num)) return alert("Enter valid & positive numbers");
+    const workout = new cycling(coords, distance, duration, elevation);
+    this.#workout.push(workout);
+  }
+
+  console.log(this.#workout);
+
+  // Render marker
+  L.marker(coords)
+    .addTo(this.#map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        autoClose: false,
+        closeOnClick: false,
+        className: `${type}-popup`,
+      })
+    )
+    .setPopupContent('💪 Workout here!')
+    .openPopup();
+
+  // Clear inputs
+  inputDistance.value =
+    inputDuration.value =
+    inputCadence.value =
+    inputElevation.value =
+    '';
+  inputDistance.focus();
+}
+
 }
 
 new App();
