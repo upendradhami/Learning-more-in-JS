@@ -3,6 +3,39 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
+
+// const rendercountry = function (data, className = '') {
+
+//   const naam = data.name.common;
+//   console.log(naam);
+//   const flag = data.flags.png;
+//   const region = data.region;
+//   const population = data.population;
+//   const language = Object.values(data.languages)[0];
+//   const currency = Object.values(data.currencies)[0].symbol;
+//   const html = `
+//        <article class="country ${className}">
+//        <img class="country__img" src="${flag}" />
+//        <div class="country__data">
+//         <h3 class="country__name">${naam}</h3>
+//         <h4 class="country__region">${region}</h4>
+//         <p class="country__row"><span>👫</span>${(population / 1_000_000).toFixed(1)} M</p>
+//         <p class="country__row"><span>🗣️</span>${language}</p>
+//         <p class="country__row"><span>💰</span>${currency}</p>
+//        </div>
+//        </article>
+//       `;
+
+//   countriesContainer.insertAdjacentHTML('beforeend', html);
+//   // countriesContainer.style.opacity = 1;
+
+// };
+
+
+// const showerror = function (msg) {
+//   countriesContainer.insertAdjacentText('beforeend', msg);
+//   // countriesContainer.style.opacity = 1;
+// }
 /////////////////////////////////////// OLD School method of AJAX call 
 // const showCountry = function (country) {
 //   const request = new XMLHttpRequest();
@@ -47,36 +80,6 @@ const countriesContainer = document.querySelector('.countries');
 // showCountry('Nepal');
 
 
-// // 
-
-const rendercountry = function (data, className = '') {
-
-  const naam = data.name.common;
-  console.log(naam);
-  const flag = data.flags.png;
-  const region = data.region;
-  const population = data.population;
-  const language = Object.values(data.languages)[0];
-  const currency = Object.values(data.currencies)[0].symbol;
-  const html = `
-       <article class="country ${className}">
-       <img class="country__img" src="${flag}" />
-       <div class="country__data">
-        <h3 class="country__name">${naam}</h3>
-        <h4 class="country__region">${region}</h4>
-        <p class="country__row"><span>👫</span>${(population / 1_000_000).toFixed(1)} M</p>
-        <p class="country__row"><span>🗣️</span>${language}</p>
-        <p class="country__row"><span>💰</span>${currency}</p>
-       </div>
-       </article>
-      `;
-
-  countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
-
-}
-
-
 ////////////////// call back hell in the OLD School method 
 
 // const getCountryandNeighbour = function (country) {
@@ -113,24 +116,109 @@ const rendercountry = function (data, className = '') {
 /////////////////////////// AJAX CALL USING PROMISES /////////////////////////////
 
 // country 1 data will be passed here
-const getcountry = function (country) {
+// const getcountry = function (country) {
 
-  fetch(` https://restcountries.com/v3.1/name/${country}`).then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    rendercountry(data[0]);
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then((response) => {
+//       if (!response.ok)
+//         throw new Error(`Country name not found ${response.status}`);
+//       return response.json();       //  err => alert(err) response for sucess , err for error in promises call
+//     }
+//     ).then((data) => {
+//       rendercountry(data[0])
 
-    console.log(data[0]);
-    let neighbour = data[0].borders[0];
-    console.log(neighbour);
+//       // country no.2 will be passed here
+//       const neighbour = data[0].borders[0];
+
+//       // CHAIINING USING PROMISES 
+//       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+//     }).then((response) => {
+//       if (!response.ok)
+//         throw new Error(`Country name not found ${response.status}`);
+//       return response.json();       //  err => alert(err) response for sucess , err for error in promises call
+//     }
+//     ).then(data =>
+//       rendercountry(data[0], 'neighbour')
+//     ).catch(err => {    // used to catch any error occuring in the upper callbacks 
+//       console.log(err);
+//       showerror(`Something went wrong ${err.message}. Try again`);
+//     }).finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     })
+// }
 
 
-    // country no.2 will be passed here  // CHAIINING USING PROMISES 
-    return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
-  }).then(response => response.json()).then(data =>
-    rendercountry(data[0], 'neighbour')
 
-)
-}
+//////////////// manually throwing and catching errors //////////////////////////
+// const fetchMSG = function (url, msg) {
+//   return fetch(url)
+//     .then((response) => {
+//       if (!response.ok)
+//         throw new Error(`${msg} ${response.status}`);
+//       return response.json();       //  err => alert(err) response for sucess , err for error in promises call
+//     }
+//     );
+// }
 
-getcountry('nepal');
+
+// const getcountry = function (country) {
+//   fetchMSG(`https://restcountries.com/v3.1/name/${country}`, 'country name not found').then((data) => {
+//     rendercountry(data[0])
+//     // country no.2 will be passed here
+//     const neighbour = data[0].borders[0];
+//     if(!neighbour) { throw new Error("neighbour not found");} 
+    
+//     return fetchMSG(`https://restcountries.com/v3.1/alpha/${neighbour}`,
+//       'country not found');
+//   }).then(data =>
+//     rendercountry(data[0], 'neighbour')
+//   ).catch(err => {  
+//     console.log(err);  // used to catch any error occuring in the upper callbacks 
+//     showerror(`Something went wrong ${err.message}. Try again`);
+//   }).finally(() => {
+//     countriesContainer.style.opacity = 1;
+//   })
+// }
+
+
+// btn.addEventListener('click', () => getcountry('Australia'));
+
+
+// // /////////////////////////////////// CODING CHALLENGE1 /////////////////
+
+// const whereAmI = function(lat, lng) {
+//   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+//   .then((response) => {
+//     // Check if the response is successful
+//     if (!response.ok) {
+//       throw new Error(`Something went wrong! Status: ${response.status}`);
+//     }
+//     // Parse the response as text, since the API returns XML
+//     return response.json(); 
+//   }).then((data) => {
+//     console.log(data); // This will log the XML string
+//     // You would need to parse the XML here if you wanted to work with the data.
+//   }).catch(err => {
+//     console.log(` ${err.message}`);
+//   });
+// }
+
+// // Example usage
+// whereAmI(27.71, 85.32);
+
+
+
+
+////////////////////////////////////// EVENT LOOPS IN PRACTICE /////////////////
+/////////// here we will learn the practical implication of call backs and microtask queues 
+
+console.log('task started');
+setTimeout(() => {
+  console.log('timer after 2 sec');
+}, 2000);          /// it is passed in the callback queue
+
+Promise.resolve().then((res) =>{ 
+  for(let i=0; i<6000000000; i++){};
+   console.log('promise section is called here')}
+  );                                      /// it is in the microtask queue so , it will be executed first 
+console.log('Task is ended');
