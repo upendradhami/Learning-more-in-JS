@@ -212,13 +212,45 @@ const countriesContainer = document.querySelector('.countries');
 ////////////////////////////////////// EVENT LOOPS IN PRACTICE /////////////////
 /////////// here we will learn the practical implication of call backs and microtask queues 
 
-console.log('task started');
-setTimeout(() => {
-  console.log('timer after 2 sec');
-}, 2000);          /// it is passed in the callback queue
+// console.log('task started');
+// setTimeout(() => {
+//   console.log('timer after 2 sec');
+// }, 2000);          /// it is passed in the callback queue
 
-Promise.resolve().then((res) =>{ 
-  for(let i=0; i<6000000000; i++){};
-   console.log('promise section is called here')}
-  );                                      /// it is in the microtask queue so , it will be executed first 
-console.log('Task is ended');
+// Promise.resolve().then((res) =>{ 
+//   for(let i=0; i<6000000000; i++){};
+//    console.log('promise section is called here')}
+//   );                                      /// it is in the microtask queue so , it will be executed first 
+// console.log('Task is ended');
+
+
+
+// //// building own promises 
+//  const lotteryres = new Promise(function(resolve, reject){
+//   console.log(' LOttery is being drawn , loading result ::>>> 🔮');
+//   setTimeout(() => {
+//      if(Math.random() >= 0.5){
+//     resolve('Hurray !!  You Win 🤑🧧💰💶');
+//   }else{
+//     reject(new Error('YOU lost your money'));
+//   }
+//   }, 2000);
+//  });
+
+//  lotteryres.then(res => console.log(res)).catch(err => console.error(`${err}`));
+
+
+/// showing callback hell in another method
+ const wait= function(second) {
+    return new Promise((resolve)=>{ setTimeout(resolve, second*1000)});
+ };
+
+ wait(2).then(()=>{
+    console.log('you have waited for 2 seconds');
+    return wait(3);
+ }).then(()=> {
+   console.log('you have waited for 3 seconds');
+    return wait(4);
+ }).then(()=> {
+  console.log('you have waited for 4 seconds');
+ })
