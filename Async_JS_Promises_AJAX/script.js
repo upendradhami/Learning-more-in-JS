@@ -4,32 +4,32 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 
-// const rendercountry = function (data, className = '') {
+const rendercountry = function (data, className = '') {
 
-//   const naam = data.name.common;
-//   console.log(naam);
-//   const flag = data.flags.png;
-//   const region = data.region;
-//   const population = data.population;
-//   const language = Object.values(data.languages)[0];
-//   const currency = Object.values(data.currencies)[0].symbol;
-//   const html = `
-//        <article class="country ${className}">
-//        <img class="country__img" src="${flag}" />
-//        <div class="country__data">
-//         <h3 class="country__name">${naam}</h3>
-//         <h4 class="country__region">${region}</h4>
-//         <p class="country__row"><span>👫</span>${(population / 1_000_000).toFixed(1)} M</p>
-//         <p class="country__row"><span>🗣️</span>${language}</p>
-//         <p class="country__row"><span>💰</span>${currency}</p>
-//        </div>
-//        </article>
-//       `;
+  const naam = data.name.common;
+  console.log(naam);
+  const flag = data.flags.png;
+  const region = data.region;
+  const population = data.population;
+  const language = Object.values(data.languages)[0];
+  const currency = Object.values(data.currencies)[0].symbol;
+  const html = `
+       <article class="country ${className}">
+       <img class="country__img" src="${flag}" />
+       <div class="country__data">
+        <h3 class="country__name">${naam}</h3>
+        <h4 class="country__region">${region}</h4>
+        <p class="country__row"><span>👫</span>${(population / 1_000_000).toFixed(1)} M</p>
+        <p class="country__row"><span>🗣️</span>${language}</p>
+        <p class="country__row"><span>💰</span>${currency}</p>
+       </div>
+       </article>
+      `;
 
-//   countriesContainer.insertAdjacentHTML('beforeend', html);
-//   // countriesContainer.style.opacity = 1;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+   countriesContainer.style.opacity = 1;
 
-// };
+};
 
 
 // const showerror = function (msg) {
@@ -184,28 +184,8 @@ const countriesContainer = document.querySelector('.countries');
 // btn.addEventListener('click', () => getcountry('Australia'));
 
 
-// // /////////////////////////////////// CODING CHALLENGE1 /////////////////
-
-// const whereAmI = function(lat, lng) {
-//   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-//   .then((response) => {
-//     // Check if the response is successful
-//     if (!response.ok) {
-//       throw new Error(`Something went wrong! Status: ${response.status}`);
-//     }
-//     // Parse the response as text, since the API returns XML
-//     return response.json(); 
-//   }).then((data) => {
-//     console.log(data); // This will log the XML string
-//     // You would need to parse the XML here if you wanted to work with the data.
-//   }).catch(err => {
-//     console.log(` ${err.message}`);
-//   });
-// }
-
-// // Example usage
+// Example usage
 // whereAmI(27.71, 85.32);
-
 
 
 
@@ -240,17 +220,134 @@ const countriesContainer = document.querySelector('.countries');
 //  lotteryres.then(res => console.log(res)).catch(err => console.error(`${err}`));
 
 
-/// showing callback hell in another method
+// /// showing callback hell in another method
  const wait= function(second) {
     return new Promise((resolve)=>{ setTimeout(resolve, second*1000)});
  };
 
- wait(2).then(()=>{
-    console.log('you have waited for 2 seconds');
-    return wait(3);
- }).then(()=> {
-   console.log('you have waited for 3 seconds');
-    return wait(4);
- }).then(()=> {
-  console.log('you have waited for 4 seconds');
- })
+//  wait(2).then(()=>{
+//     console.log('you have waited for 2 seconds');
+//     return wait(3);
+//  }).then(()=> {
+//    console.log('you have waited for 3 seconds');
+//     return wait(4);
+//  }).then(()=> {
+//   console.log('you have waited for 4 seconds');
+//  })
+
+
+////////////////////////////////// PROMISYING GEOLOCATION API 
+
+// const getPosition = new Promise(function(resolve,reject){
+//    // return  navigator.geolocation.getCurrentPosition(
+//    //    position => resolve(position),
+//    //    err => reject(err)
+//    //  )
+//    return navigator.geolocation.getCurrentPosition(resolve,reject)
+// });
+
+// getPosition.then(pos => console.log(pos));
+
+
+// // /////////////////////////////////// CODING CHALLENGE1 /////////////////
+
+
+// const whereAmI = function() {
+   
+//   getPosition.then(pos => {
+//    const {latitude:lat, longitude:lng} =pos.coords;
+//    return  fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`) ;
+//   }).then(response => {
+//       if (!response.ok) {
+//         throw new Error(`Something went wrong! Status: ${response.status}`);
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       if (data.address) {
+//         const city = data.address.city || data.address.town || data.address.village;
+//         const country = data.address.country;
+//         console.log(country);
+//         getcountry(country);
+//       } else {
+//         console.log("No address found for these coordinates.");
+//       }
+//     })
+//     .catch(err => {
+//       console.log(`❌ Error: ${err.message}`);
+//     });
+// };
+ 
+//  btn.addEventListener('click' ,whereAmI());
+
+
+ /////////////////////////////////// CODING CHALLENGE 2 //////////////////
+ /*
+ const imgContainer = document.querySelector('.images');
+
+ const Imageloader =  function(imgPath) {
+   const image = document.createElement('img');
+   image.setAttribute('src',`${imgPath}`);
+
+   return new Promise(function(resolve, reject) {
+    image.addEventListener('load',()=> {
+      imgContainer.append(image);
+      resolve(image);
+   })
+    image.addEventListener('error',()=> {
+      reject(new Error('Image not loade'));
+    })
+ }
+ )}
+
+ let curImg;
+ Imageloader(`./img/img-1.jpg`).then(img =>{
+   curImg=img;
+   return wait(3);
+ }).then(() => {
+   curImg.style.display = 'none';
+   return  wait(2) ,Imageloader('img/img-2.jpg');
+ }).then(img=> {
+   curImg=img;
+   return wait(3);
+ }).then(() => {
+   curImg.style.display = 'none';
+   return Imageloader('img/img-3.jpg');
+ }).then(img=>{
+   curImg =img;
+   return  wait(3);
+
+  }).then(()=> curImg.style.display = 'none').catch(err => console.log(err));
+  */
+
+//   fetch(`https://restcountries.com/v3.1/name/Nepal`).then(res=> res.json()).then(data=> );
+
+
+ //// get position function 
+ const getPosition = function() {
+    return new Promise((resolve,reject) => {
+     navigator.geolocation.getCurrentPosition(resolve,reject);
+    })
+ }
+
+  const whereAmI = async function(){
+     const resData = await getPosition();
+     console.log(resData);
+     const {latitude:lat , longitude:lng} = resData.coords;
+
+     const countryDataresponse = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`) ;
+     console.log(countryDataresponse);
+     const countryData = await countryDataresponse.json();
+     console.log(countryData);
+
+     const res = await fetch(`https://restcountries.com/v3.1/name/${countryData.address.country}`) ;
+     
+     const data = await res.json();
+     console.log(data[0]);
+
+     rendercountry(data[0]);
+    
+  };
+
+//   whereAmI();
+
